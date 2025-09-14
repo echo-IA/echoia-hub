@@ -30,13 +30,12 @@
 							</div>
 						</div>
 						<nav>
-							<ul>
-								<li><a href="#intro">Intro</a></li>
-								<li><a href="#work">Work</a></li>
-								<li><a href="#about">About</a></li>
-								<li><a href="#contact">Contact</a></li>
-								<!--<li><a href="#elements">Elements</a></li>-->
-							</ul>
+						  <ul>
+							<li><a href="pages/about.html">About</a></li>
+							<li><a href="pages/catalogs.html">Catalogs</a></li>
+							<li><a href="pages/submit.html">Submit</a></li>
+							<li><a href="pages/contact.html">Contact</a></li>
+						  </ul>
 						</nav>
 					</header>
 
@@ -357,6 +356,11 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+		<script>
+		  const map = { "#about":"pages/about.html", "#work":"pages/catalogs.html", "#intro":"pages/about.html", "#contact":"pages/contact.html" };
+		  if (map[location.hash]) location.replace(map[location.hash]);
+		</script>
 
 	</body>
 </html>
