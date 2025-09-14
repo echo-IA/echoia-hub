@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: Catalog submission form
-    url: https://github.com/echo-IA/shape-catalogs/issues/new?template=catalog-submission.yml
+    url: https://github.com/echo-ia/echoia-hub/issues/new?template=catalog-submission.yml
     about: Use this form to propose a new catalog.

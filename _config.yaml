@@ -12,7 +12,7 @@ code_license_url: "https://opensource.org/license/mit"
 zenodo_community_url: "https://zenodo.org/communities/echo-ia"  #
 
 url: "https://echo-ia.github.io"   # my user/org site
-baseurl: "/shape-catalogs"         # my project repo name
+baseurl: "/echoia-hub"         # my project repo name
 permalink: pretty                  # makes /page/ instead of /page.html
 
 defaults:
