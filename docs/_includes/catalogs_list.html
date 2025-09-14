@@ -11,17 +11,29 @@
 
 <script>
 (function() {
+  // baseurl-aware CSV path
   const dataUrl = "{{ data_path | relative_url }}";
   const containerId = "{{ container_id }}";
   const emptyId = "{{ empty_id }}";
 
   // Simple HTML escaper
-  const esc = (s) => (s || '').toString().replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+  const esc = (s) => (s || '').toString().replace(/[&<>'"]/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'
+  }[c]));
 
   document.addEventListener('DOMContentLoaded', function() {
+    const emptyEl = document.getElementById(emptyId);
+    const containerEl = document.getElementById(containerId);
+
+    if (!containerEl) {
+      console.error('Container not found:', containerId);
+      if (emptyEl) emptyEl.style.display = 'block';
+      return;
+    }
+
     if (typeof Papa === 'undefined') {
       console.error('PapaParse not loaded. Pass papaparse=true to scripts include.');
-      document.getElementById(emptyId).style.display = 'block';
+      if (emptyEl) emptyEl.style.display = 'block';
       return;
     }
 
@@ -29,18 +41,17 @@
       download: true,
       header: true,
       skipEmptyLines: true,
-      complete: ({ data }) => renderCatalogs(data),
+      complete: ({ data }) => renderCatalogs(data, containerEl, emptyEl),
       error: (err) => {
         console.error('CSV load error:', err);
-        document.getElementById(emptyId).style.display = 'block';
+        if (emptyEl) emptyEl.style.display = 'block';
       }
     });
   });
 
-  function renderCatalogs(rows) {
-    const wrap = document.getElementById(containerId);
+  function renderCatalogs(rows, wrap, emptyEl) {
     if (!rows || !rows.length) {
-      document.getElementById(emptyId).style.display = 'block';
+      if (emptyEl) emptyEl.style.display = 'block';
       return;
     }
 
@@ -53,9 +64,10 @@
       const area    = esc(r.sky_area_deg2 || r['sky area'] || '');
       const nClust  = esc(r.n_gal_clustering || r['number of objects for clustering'] || '');
       const nShapes = esc(r.n_gal_shapes || r['number of objects for shapes'] || '');
-      const aux     = esc(r.aux_info || r['auxiliary info'] || '');
+      const auxRaw  = (r.aux_info || r['auxiliary info'] || '');
       const license = esc(r.license || '');
-      const doiRaw  = (r.doi || '').trim();
+
+      const doiRaw  = (r.doi  || '').trim();
       const linkRaw = (r.link || '').trim();
       const doiHref = doiRaw ? `https://doi.org/${esc(doiRaw)}` : '';
 
@@ -101,7 +113,7 @@
       </div>
       <div>
         <h5>Auxiliary info</h5>
-        <div>${ax(aux)}</div>
+        <div>${ax(auxRaw)}</div>
       </div>
       <div>
         <h5>License</h5>
@@ -121,11 +133,10 @@
     }).join('');
   }
 
-  // light touch to make aux lists nicer
+  // light touch to make aux lists nicer (and safely escaped)
   function ax(s) {
-    const t = (s || '').trim();
+    const t = (s || '').toString().trim();
     if (!t) return '';
-    // turn comma lists into nicer comma+space
     return esc(t.replace(/\s*,\s*/g, ', '));
   }
 })();
