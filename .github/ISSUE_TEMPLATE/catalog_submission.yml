@@ -1,0 +1,132 @@
+name: "Catalog submission"
+description: "Propose a publicly available galaxy shape catalog to add to the index."
+title: "Catalog submission: <NAME>"
+labels: ["submission", "catalog"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Catalog name
+      placeholder: e.g., DES Y3 Shape Catalog (IM3SHAPE)
+    validations:
+      required: true
+
+  - type: input
+    id: doi
+    attributes:
+      label: DOI (preferred)
+      placeholder: e.g., 10.5281/zenodo.1234567
+    validations:
+      required: false
+
+  - type: input
+    id: landing_url
+    attributes:
+      label: Landing page / dataset URL
+      placeholder: e.g., https://zenodo.org/records/1234567
+    validations:
+      required: true
+
+  - type: input
+    id: license
+    attributes:
+      label: License (if known)
+      placeholder: e.g., CC BY 4.0, CC0, custom
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: "### Redshift source"
+
+  - type: input
+    id: redshift_survey
+    attributes:
+      label: Redshift survey
+      placeholder: e.g., DES, KiDS, SDSS, VIPERS
+  - type: input
+    id: redshift_sample
+    attributes:
+      label: Redshift sample / selection
+      placeholder: e.g., GOLD, LRGs, spec training set
+  - type: dropdown
+    id: redshift_type
+    attributes:
+      label: Redshift type
+      options: ["photo-z", "spec-z", "hybrid", "unknown"]
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: "### Shape source"
+
+  - type: input
+    id: shape_survey
+    attributes:
+      label: Shape survey
+      placeholder: e.g., DES, KiDS, HSC
+  - type: input
+    id: shape_sample
+    attributes:
+      label: Shape sample / selection
+      placeholder: e.g., Metacalib. sample, bright-end cut
+  - type: dropdown
+    id: shape_method
+    attributes:
+      label: Measurement method
+      options:
+        - metacalibration
+        - lensfit
+        - im3shape
+        - model-fitting
+        - moments / KSB / HSM
+        - other / mixed / unknown
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: "### Coverage & counts"
+
+  - type: input
+    id: sky_area_deg2
+    attributes:
+      label: Sky area (deg²)
+      placeholder: e.g., 4143
+    validations:
+      required: false
+  - type: input
+    id: n_clustering
+    attributes:
+      label: Number of objects (clustering)
+      placeholder: e.g., 20,000,000
+  - type: input
+    id: n_shapes
+    attributes:
+      label: Number of objects (shapes)
+      placeholder: e.g., 100,000,000
+
+  - type: textarea
+    id: aux
+    attributes:
+      label: Auxiliary info available
+      description: e.g., luminosity, stellar mass, colours, morphology, flags
+      placeholder: e.g., g-r colours, stellar mass estimates, star/galaxy flags
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      placeholder: Any caveats, usage notes, or key papers.
+
+  - type: textarea
+    id: references
+    attributes:
+      label: Key references
+      placeholder: arXiv/bibcode/DOIs for methods or releases
+
+  - type: input
+    id: submitter
+    attributes:
+      label: Your name / handle (optional)
+      placeholder: e.g., @yourgithub

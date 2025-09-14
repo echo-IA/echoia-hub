@@ -2,7 +2,6 @@
 title: "Catalogs"
 permalink: /catalogs/
 ---
-
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -17,51 +16,102 @@ permalink: /catalogs/
 
       {% include header.html active='catalogs' %}
 
-      <!-- Main -->
       <article id="main">
-        <header class="special container">
-          <span class="icon regular fa-chart-bar"></span>
-          <h2>Catalogs</h2>
-          <p>Community-maintained list of publicly available galaxy shape catalogs.</p>
-        </header>
+        {% include hero_intro.html
+           icon='fa-table'
+           heading='Browse <strong>public galaxy shape catalogs</strong>'
+           blurb='Click a row to see details: redshift/shape sources, area, counts, aux columns, and notes.' %}
 
-        <!-- One -->
         <section class="wrapper style4 container">
           <div class="content">
             <section>
-              <a href="#" class="image featured">
-                <img src="{{ '/images/pic04.jpg' | relative_url }}" alt="" />
-              </a>
-              <header>
-                <h3>Dolore Amet Consequat</h3>
-              </header>
-              <p>…your content…</p>
+              <header><h3>Catalog list</h3></header>
+
+              <div class="catalog-list">
+                {% assign items = site.data.catalogs %}
+                {% if items and items.size > 0 %}
+                  {% for c in items %}
+                    <details class="catalog-item">
+                      <summary>
+                        <strong>{{ c.name }}</strong>
+                        {% if c.doi %} · <a href="https://doi.org/{{ c.doi }}" target="_blank" rel="noopener">DOI</a>{% endif %}
+                        {% if c.landing_url %} · <a href="{{ c.landing_url }}" target="_blank" rel="noopener">Link</a>{% endif %}
+                        {% if c.license %} · <span class="license">{{ c.license }}</span>{% endif %}
+                      </summary>
+
+                      <div class="catalog-grid">
+                        <div>
+                          <h4>Redshift</h4>
+                          <p>
+                            {{ c.redshift_survey | default: '—' }}
+                            {% if c.redshift_sample %} — {{ c.redshift_sample }}{% endif %}
+                            {% if c.redshift_type %} ({{ c.redshift_type }}){% endif %}
+                          </p>
+                        </div>
+
+                        <div>
+                          <h4>Shapes</h4>
+                          <p>
+                            {{ c.shape_survey | default: '—' }}
+                            {% if c.shape_sample %} — {{ c.shape_sample }}{% endif %}
+                            {% if c.shape_method %} ({{ c.shape_method }}){% endif %}
+                          </p>
+                        </div>
+
+                        <div>
+                          <h4>Footprint</h4>
+                          <p>{% if c.sky_area_deg2 %}{{ c.sky_area_deg2 }} deg²{% else %}—{% endif %}</p>
+                        </div>
+
+                        <div>
+                          <h4>Counts</h4>
+                          <p>
+                            clustering: {{ c.n_clustering | default: '—' }}<br />
+                            shapes: {{ c.n_shapes | default: '—' }}
+                          </p>
+                        </div>
+
+                        <div>
+                          <h4>Aux</h4>
+                          <p>{{ c.aux | default: '—' }}</p>
+                        </div>
+
+                        <div>
+                          <h4>Notes</h4>
+                          <p>{{ c.notes | default: '—' }}</p>
+                        </div>
+                      </div>
+                    </details>
+                  {% endfor %}
+                {% else %}
+                  <p><em>No catalogs yet. Be the first to <a href="{{ '/submit/' | relative_url }}">submit one</a>!</em></p>
+                {% endif %}
+              </div>
             </section>
           </div>
         </section>
 
-        <!-- Two -->
         <section class="wrapper style1 container special">
           <div class="row">
             <div class="col-4 col-12-narrower">
               <section>
-                <header><h3>This is Something</h3></header>
-                <p>…</p>
-                <footer><ul class="buttons"><li><a href="#" class="button small">Learn More</a></li></ul></footer>
+                <header><h3>Contribute</h3></header>
+                <p>Submit a new catalog with DOI, license, and minimal metadata.</p>
+                <footer><ul class="buttons"><li><a href="{{ '/submit/' | relative_url }}" class="button small">Submit</a></li></ul></footer>
               </section>
             </div>
             <div class="col-4 col-12-narrower">
               <section>
-                <header><h3>Also Something</h3></header>
-                <p>…</p>
-                <footer><ul class="buttons"><li><a href="#" class="button small">Learn More</a></li></ul></footer>
+                <header><h3>Licensing</h3></header>
+                <p>We list license info; datasets remain © their owners at the original host.</p>
+                <footer><ul class="buttons"><li><a href="{{ '/catalogs/' | relative_url }}#license" class="button small">Learn More</a></li></ul></footer>
               </section>
             </div>
             <div class="col-4 col-12-narrower">
               <section>
-                <header><h3>Probably Something</h3></header>
-                <p>…</p>
-                <footer><ul class="buttons"><li><a href="#" class="button small">Learn More</a></li></ul></footer>
+                <header><h3>Roadmap</h3></header>
+                <p>Toward a unified IA analysis pipeline built on shared, comparable inputs.</p>
+                <footer><ul class="buttons"><li><a href="https://github.com/echo-IA/shape-catalogs/issues" target="_blank" class="button small">Open Issues</a></li></ul></footer>
               </section>
             </div>
           </div>
@@ -71,7 +121,30 @@ permalink: /catalogs/
       {% include footer.html %}
     </div>
 
-    {% include scripts.html papaparse=true %}
-
+    {% comment %} No PapaParse needed now {% endcomment %}
+    {% include scripts.html %}
+    <style>
+      /* tiny enhancement for details/summary and grid */
+      details.catalog-item {
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 0.5rem;
+        padding: 0.75rem 1rem;
+        margin: 0.75rem 0;
+        background: rgba(255,255,255,0.025);
+      }
+      details.catalog-item > summary {
+        cursor: pointer;
+        list-style: none;
+      }
+      details.catalog-item > summary::-webkit-details-marker { display: none; }
+      .catalog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 0.75rem 1.25rem;
+        margin-top: 0.75rem;
+      }
+      .catalog-grid h4 { margin: 0 0 0.25rem 0; }
+      .license { opacity: 0.8; }
+    </style>
   </body>
 </html>
