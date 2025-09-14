@@ -1,0 +1,43 @@
+{%- comment -%}
+Usage:
+  {% include copyright_block.html
+      owner="echoIA Community"
+      start_year="2025"
+      site_license_name="CC BY 4.0"
+      site_license_url="https://creativecommons.org/licenses/by/4.0/"
+      metadata_license_name="CC0 1.0"
+      metadata_license_url="https://creativecommons.org/publicdomain/zero/1.0/"
+  %}
+Or rely on _config.yml keys with same names.
+{%- endcomment -%}
+
+{%- assign owner      = include.owner | default: site.owner | default: site.title -%}
+{%- assign start_year = include.start_year | default: site.copyright_start_year | default: site.time | date: '%Y' -%}
+{%- assign now_year   = site.time | date: '%Y' -%}
+
+{%- assign site_lic_name = include.site_license_name | default: site.site_content_license_name | default: "CC BY 4.0" -%}
+{%- assign site_lic_url  = include.site_license_url  | default: site.site_content_license_url  | default: "https://creativecommons.org/licenses/by/4.0/" -%}
+
+{%- assign meta_lic_name = include.metadata_license_name | default: site.metadata_license_name | default: "CC0 1.0" -%}
+{%- assign meta_lic_url  = include.metadata_license_url  | default: site.metadata_license_url  | default: "https://creativecommons.org/publicdomain/zero/1.0/" -%}
+
+<ul class="copyright">
+  <li>
+    &copy;
+    {%- if start_year == now_year -%}
+      {{ now_year }}
+    {%- else -%}
+      {{ start_year }}–{{ now_year }}
+    {%- endif -%}
+    {{ owner }}
+  </li>
+  <li>
+    Site content licensed
+    <a href="{{ site_lic_url }}" target="_blank" rel="noopener">{{ site_lic_name }}</a>.
+  </li>
+  <li>
+    Catalog metadata
+    <a href="{{ meta_lic_url }}" target="_blank" rel="noopener">{{ meta_lic_name }}</a>; linked datasets © their owners.
+  </li>
+  <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+</ul>
