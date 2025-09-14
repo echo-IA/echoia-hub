@@ -8,3 +8,15 @@ metadata_license_url: "https://creativecommons.org/publicdomain/zero/1.0/"
 
 code_license_name: "MIT"
 code_license_url: "https://opensource.org/license/mit"
+
+url: "https://echo-ia.github.io"   # your user/org site
+baseurl: "/shape-catalogs"         # your project repo name
+permalink: pretty                  # makes /page/ instead of /page.html
+
+defaults:
+  - scope:
+      path: "pages"                # everything in /pages
+      type: "pages"
+    values:
+      permalink: "/:basename/"     # /catalogs/, /submit/, /contact/
+
