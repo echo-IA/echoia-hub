@@ -7,6 +7,9 @@
       <li class="{% if include.active == 'home' %}current{% endif %}">
         <a href="{{ '/' | relative_url }}">Home</a>
       </li>
+      <li class="{% if include.active == 'about' %}current{% endif %}">
+        <a href="{{ '/about/' | relative_url }}">About</a>
+      </li>
       <li class="{% if include.active == 'catalogs' %}current{% endif %}">
         <a href="{{ '/catalogs/' | relative_url }}">Catalogs</a>
       </li>

@@ -1,0 +1,110 @@
+---
+title: "About"
+permalink: /about/
+---
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ page.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+    <noscript><link rel="stylesheet" href="{{ '/assets/css/noscript.css' | relative_url }}" /></noscript>
+  </head>
+  <body class="no-sidebar is-preload">
+    <div id="page-wrapper">
+
+      {% include header.html active='about' %}
+
+      <article id="main">
+        <header class="special container">
+          <span class="icon regular fa-lightbulb"></span>
+          <h2>About <strong>echoIA</strong> & the Shape Catalogs Portal</h2>
+          <p>
+            echoIA is a community effort to build a <strong>unified pipeline for Intrinsic Alignment (IA) analyses</strong>.
+            The first step is simple but powerful: <strong>collect</strong> publicly available galaxy shape catalogs in one place,
+            with clean links and minimal, comparable metadata so everyone can see what’s out there at a glance.
+          </p>
+        </header>
+
+        <section class="wrapper style4 container">
+          <div class="content">
+            <!-- What is echoIA -->
+            <section>
+              <header><h3>What is echoIA?</h3></header>
+              <p>
+                <strong>Intrinsic Alignments (IA)</strong> are correlations in galaxy orientations caused by large-scale tidal fields.
+                Unlike gravitational lensing (a line-of-sight shear from intervening matter), IA is an in-situ effect tied to galaxy
+                formation and environment. Getting IA right is essential for current and upcoming cosmology surveys to meet their
+                precision goals.
+              </p>
+              <p>
+                <strong>echoIA</strong> brings together observers, theorists, and survey teams to coordinate IA measurements and modeling,
+                with a shared vocabulary and interoperable tools that make results easier to compare and combine.
+              </p>
+            </section>
+
+            <hr />
+
+            <!-- Why shape catalogs first -->
+            <section>
+              <header><h3>Why start with shape catalogs?</h3></header>
+              <p>
+                A <em>shape catalog</em> provides per-galaxy shape measurements (e.g., ellipticities/shear) plus basic context
+                like redshifts and quality flags. Catalogs are the raw ingredients for IA analyses. By indexing them with consistent
+                top-level fields and stable links (often DOIs on Zenodo or institutional repositories), we make discovery fast and
+                comparisons fair.
+              </p>
+              <p class="minor">
+                We do <strong>not</strong> host datasets; each catalog remains under its own license and citation. We only point you
+                there with clear metadata.
+              </p>
+            </section>
+
+            <hr />
+
+            <!-- What this portal provides -->
+            <section>
+              <header><h3>What this portal provides</h3></header>
+              <ul>
+                <li><strong>Curated index</strong> of public galaxy shape catalogs with stable links and licensing notes.</li>
+                <li><strong>Comparable metadata</strong> across releases so you can quickly scan scope and applicability.</li>
+                <li><strong>Community submissions</strong> to keep the index fresh and correct.</li>
+              </ul>
+              <p>
+                Details of the exact fields we track live on the
+                <a href="{{ '/catalogs/' | relative_url }}">Catalogs</a> and
+                <a href="{{ '/submit/' | relative_url }}">Submit</a> pages.
+              </p>
+              <ul class="buttons">
+                <li><a class="button primary" href="{{ '/catalogs/' | relative_url }}">Browse catalogs</a></li>
+                <li><a class="button" href="{{ '/submit/' | relative_url }}">Submit a catalog</a></li>
+              </ul>
+            </section>
+
+            <hr />
+
+            <!-- Roadmap to a unified IA pipeline -->
+            <section>
+              <header><h3>Roadmap toward a unified IA pipeline</h3></header>
+              <ol>
+                <li><strong>Collect</strong> public shape catalogs with minimal, consistent metadata (this portal).</li>
+                <li><strong>Harmonize</strong> schema & flags to streamline cross-survey use.</li>
+                <li><strong>Provide</strong> reference notebooks/containers that load and validate multiple catalogs.</li>
+                <li><strong>Establish</strong> evaluation benchmarks and best practices for IA systematics.</li>
+              </ol>
+              <p>
+                Want to help? Open an issue or PR on GitHub, or contact us from the
+                <a href="{{ '/contact/' | relative_url }}">Contact</a> page.
+              </p>
+            </section>
+          </div>
+        </section>
+      </article>
+
+      {% include footer.html %}
+    </div>
+
+    {% include scripts.html %}
+  </body>
+</html>
