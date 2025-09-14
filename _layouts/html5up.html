@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>{{ page.title }}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+    <noscript><link rel="stylesheet" href="{{ '/assets/css/noscript.css' | relative_url }}" /></noscript>
+    <style>
+      /* ensures single-page render without popups */
+      body.is-article-visible #main { display:block !important; }
+      #main article.active { display:block !important; }
+    </style>
+  </head>
+  <body class="is-preload is-article-visible">
+    <div id="wrapper">
+      <!-- Header (from your index.html) -->
+      <header id="header">
+        <div class="logo">
+          <span class="icon fa-calendar-days"></span>
+        </div>
+        <div class="content">
+          <div class="inner">
+            <h1>{{ site.title }}</h1>
+            <p>{{ site.tagline }}</p>
+          </div>
+        </div>
+
+        {% include nav.html %}
+      </header>
+
+      <!-- Main -->
+      <div id="main">
+        <article class="active">
+          {{ content }}
+        </article>
+      </div>
+
+      <!-- Footer -->
+      <footer id="footer">
+        <p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+      </footer>
+    </div>
+
+    <!-- BG -->
+    <div id="bg"></div>
+
+    <!-- Scripts -->
+    <script src="{{ '/assets/js/jquery.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/browser.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/breakpoints.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/util.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  </body>
+</html>
