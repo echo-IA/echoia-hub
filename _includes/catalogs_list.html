@@ -1,132 +1,79 @@
-{%- assign data_path = include.data_path | default: '/data/catalogs.csv' -%}
-{%- assign container_id = include.container_id | default: 'catalogs-list' -%}
-{%- assign empty_id = include.empty_id | default: 'catalogs-empty' -%}
+{% comment %}
+Renders the catalogs from a Jekyll _data CSV/YAML.
+Usage:
+  {% include catalogs_list.html data_key='catalogs' %}
+Looks for site.data[data_key] (defaults to 'catalogs').
+CSV header keys expected (case-sensitive):
+name, landing_url, doi, license, redshift_survey, redshift_sample, redshift_type,
+shape_survey, shape_sample, shape_method, sky_area_deg2, n_clustering, n_shapes, aux, notes
+{% endcomment %}
+
+{% assign rows = site.data[include.data_key | default: 'catalogs'] %}
 
 <section class="wrapper style4 container">
   <div class="content">
-    <div id="{{ container_id }}"></div>
-    <p id="{{ empty_id }}" style="display:none;">No catalogs yet.</p>
+    <section>
+      <header><h3>Catalog list</h3></header>
+
+      <div class="catalog-list">
+        {% if rows and rows.size > 0 %}
+          {% for c in rows %}
+            <details class="catalog-item">
+              <summary>
+                <strong class="name">{{ c.name }}</strong>
+                {% if c.doi %} · <a class="ext" href="https://doi.org/{{ c.doi }}" target="_blank" rel="noopener">DOI</a>{% endif %}
+                {% if c.landing_url %} · <a class="ext" href="{{ c.landing_url }}" target="_blank" rel="noopener">Link</a>{% endif %}
+                {% if c.license %} · <span class="license">{{ c.license }}</span>{% endif %}
+              </summary>
+
+              <div class="catalog-grid">
+                <div>
+                  <h4>Redshift</h4>
+                  <p>
+                    {{ c.redshift_survey | default: '—' }}
+                    {% if c.redshift_sample %} — {{ c.redshift_sample }}{% endif %}
+                    {% if c.redshift_type %} ({{ c.redshift_type }}){% endif %}
+                  </p>
+                </div>
+
+                <div>
+                  <h4>Shapes</h4>
+                  <p>
+                    {{ c.shape_survey | default: '—' }}
+                    {% if c.shape_sample %} — {{ c.shape_sample }}{% endif %}
+                    {% if c.shape_method %} ({{ c.shape_method }}){% endif %}
+                  </p>
+                </div>
+
+                <div>
+                  <h4>Footprint</h4>
+                  <p>{% if c.sky_area_deg2 %}{{ c.sky_area_deg2 }} deg²{% else %}—{% endif %}</p>
+                </div>
+
+                <div>
+                  <h4>Counts</h4>
+                  <p>
+                    clustering: {{ c.n_clustering | default: '—' }}<br />
+                    shapes: {{ c.n_shapes | default: '—' }}
+                  </p>
+                </div>
+
+                <div>
+                  <h4>Aux</h4>
+                  <p>{{ c.aux | default: '—' }}</p>
+                </div>
+
+                <div>
+                  <h4>Notes</h4>
+                  <p>{{ c.notes | default: '—' }}</p>
+                </div>
+              </div>
+            </details>
+          {% endfor %}
+        {% else %}
+          <p><em>No catalogs yet. Be the first to <a href="{{ '/submit/' | relative_url }}">submit one</a>!</em></p>
+        {% endif %}
+      </div>
+    </section>
   </div>
 </section>
-
-<script>
-(function() {
-  const dataUrl = "{{ data_path | relative_url }}";
-  const containerId = "{{ container_id }}";
-  const emptyId = "{{ empty_id }}";
-
-  // Simple HTML escaper
-  const esc = (s) => (s || '').toString().replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof Papa === 'undefined') {
-      console.error('PapaParse not loaded. Pass papaparse=true to scripts include.');
-      document.getElementById(emptyId).style.display = 'block';
-      return;
-    }
-
-    Papa.parse(dataUrl, {
-      download: true,
-      header: true,
-      skipEmptyLines: true,
-      complete: ({ data }) => renderCatalogs(data),
-      error: (err) => {
-        console.error('CSV load error:', err);
-        document.getElementById(emptyId).style.display = 'block';
-      }
-    });
-  });
-
-  function renderCatalogs(rows) {
-    const wrap = document.getElementById(containerId);
-    if (!rows || !rows.length) {
-      document.getElementById(emptyId).style.display = 'block';
-      return;
-    }
-
-    wrap.innerHTML = rows.map(r => {
-      // Be forgiving about header names
-      const name    = esc(r.name || r.sample || 'Untitled');
-      const survey  = esc(r.survey || r['redshift source'] || '');
-      const ztype   = esc(r.redshift_type || r['redshift type'] || r.photo_vs_spec || r['photo vs spec'] || '');
-      const shape   = esc(r.shape_measurement || r['shape source'] || '');
-      const area    = esc(r.sky_area_deg2 || r['sky area'] || '');
-      const nClust  = esc(r.n_gal_clustering || r['number of objects for clustering'] || '');
-      const nShapes = esc(r.n_gal_shapes || r['number of objects for shapes'] || '');
-      const aux     = esc(r.aux_info || r['auxiliary info'] || '');
-      const license = esc(r.license || '');
-      const doiRaw  = (r.doi || '').trim();
-      const linkRaw = (r.link || '').trim();
-      const doiHref = doiRaw ? `https://doi.org/${esc(doiRaw)}` : '';
-
-      const linkHtml = [
-        doiRaw  ? `<a class="ext" target="_blank" rel="noopener" href="${doiHref}">DOI</a>` : '',
-        linkRaw ? `<a class="ext" target="_blank" rel="noopener" href="${esc(linkRaw)}">Data</a>` : ''
-      ].filter(Boolean).join(' · ');
-
-      const metaBits = [
-        survey,
-        ztype ? `${ztype}` : '',
-        area ? `${area} deg²` : '',
-        nShapes ? `shapes: ${nShapes}` : ''
-      ].filter(Boolean).join(' · ');
-
-      return `
-<details class="catalog">
-  <summary>
-    <span class="name">${name}${linkHtml ? ` <span class="ext">· ${linkHtml}</span>` : ''}</span>
-    <span class="meta">${metaBits}</span>
-  </summary>
-  <div class="catalog-details">
-    <div class="cols">
-      <div>
-        <h5>Redshift source</h5>
-        <div>${survey}${ztype ? ` (${ztype})` : ''}</div>
-      </div>
-      <div>
-        <h5>Shape source</h5>
-        <div>${shape}</div>
-      </div>
-      <div>
-        <h5>Sky area</h5>
-        <div>${area ? `${area} deg²` : ''}</div>
-      </div>
-      <div>
-        <h5>Objects (clustering)</h5>
-        <div>${nClust}</div>
-      </div>
-      <div>
-        <h5>Objects (shapes)</h5>
-        <div>${nShapes}</div>
-      </div>
-      <div>
-        <h5>Auxiliary info</h5>
-        <div>${ax(aux)}</div>
-      </div>
-      <div>
-        <h5>License</h5>
-        <div>${license}</div>
-      </div>
-      ${r.notes ? `
-      <div style="grid-column: 1 / -1;">
-        <h5>Notes</h5>
-        <div>${esc(r.notes)}</div>
-      </div>` : ''}
-      <div class="links" style="grid-column: 1 / -1;">
-        ${linkHtml}
-      </div>
-    </div>
-  </div>
-</details>`;
-    }).join('');
-  }
-
-  // light touch to make aux lists nicer
-  function ax(s) {
-    const t = (s || '').trim();
-    if (!t) return '';
-    // turn comma lists into nicer comma+space
-    return esc(t.replace(/\s*,\s*/g, ', '));
-  }
-})();
-</script>
