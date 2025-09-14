@@ -1,13 +1,11 @@
----
 <header id="header" class="alt">
-  <h1 id="logo"><a href="index.html">Shape Catalogs <span> echoIA</span></a></h1>
+  <h1 id="logo"><a href="{{ '/index.html' | relative_url }}">Shape Catalogs <span>echoIA</span></a></h1>
   <nav id="nav">
     <ul>
-      <li class="current"><a href="index.html">About</a></li>
-      <li><a href="catalogs.html">Catalogs</a></li>
-      <li><a href="submit.html">Submit</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li class="{% if include.active == 'about' %}current{% endif %}"><a href="{{ '/index.html'     | relative_url }}">About</a></li>
+      <li class="{% if include.active == 'catalogs' %}current{% endif %}"><a href="{{ '/catalogs.html' | relative_url }}">Catalogs</a></li>
+      <li class="{% if include.active == 'submit' %}current{% endif %}"><a href="{{ '/submit.html'   | relative_url }}">Submit</a></li>
+      <li class="{% if include.active == 'contact' %}current{% endif %}"><a href="{{ '/contact.html'  | relative_url }}">Contact</a></li>
     </ul>
   </nav>
 </header>
----
