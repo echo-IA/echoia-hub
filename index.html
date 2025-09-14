@@ -14,24 +14,16 @@ permalink: /
   <body class="index is-preload">
     <div id="page-wrapper">
 
+      <--! This is my header -->
       {% include header.html active='home' %}
 
-      {%
-        include banner.html
-        title="echo-IA"
-        lead="A community index of publicly available galaxy shape catalogs."
-        sublead="Clear links · Comparable metadata · Faster discovery"
-        cta="Tell Me More"
-      %}
+      <--! This is my banner -->
+      {% include banner.html %}
 
-      <article id="main">
-        {%
-          include hero_intro.html
-          icon="fa-chart-bar"
-          heading="A community index of <strong>galaxy shape catalogs</strong>"
-          blurb="echo-IA is building a unified pipeline for Intrinsic Alignment (IA) analyses. Our first step: a clear, comparable list of public shape catalogs with stable links and minimal metadata."
-        %}
+      <--! This is my mini intro -->
+      {% include intro.html %}
 
+      <--! This is my about block -->
         {% include_relative pages/_partials/about_block.html %}
       </article>
 
