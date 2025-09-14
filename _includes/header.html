@@ -3,9 +3,9 @@
   <nav id="nav">
     <ul>
       <li class="{% if include.active == 'about' %}current{% endif %}"><a href="{{ '/index.html'     | relative_url }}">About</a></li>
-      <li class="{% if include.active == 'catalogs' %}current{% endif %}"><a href="{{ '/catalogs.html' | relative_url }}">Catalogs</a></li>
-      <li class="{% if include.active == 'submit' %}current{% endif %}"><a href="{{ '/submit.html'   | relative_url }}">Submit</a></li>
-      <li class="{% if include.active == 'contact' %}current{% endif %}"><a href="{{ '/contact.html'  | relative_url }}">Contact</a></li>
+      <li class="{% if include.active == 'catalogs' %}current{% endif %}"><a href="{{ '/pages/catalogs.html' | relative_url }}">Catalogs</a></li>
+      <li class="{% if include.active == 'submit' %}current{% endif %}"><a href="{{ '/pages/submit.html'   | relative_url }}">Submit</a></li>
+      <li class="{% if include.active == 'contact' %}current{% endif %}"><a href="{{ '/pages/contact.html'  | relative_url }}">Contact</a></li>
     </ul>
   </nav>
 </header>
