@@ -16,91 +16,28 @@ permalink: /
 
       {% include header.html active='home' %}
 
-			<!-- Banner -->
-				<section id="banner">
+      {%
+        include banner.html
+        title="echo-IA"
+        lead="A community index of publicly available galaxy shape catalogs."
+        sublead="Clear links · Comparable metadata · Faster discovery"
+        cta="Tell Me More"
+      %}
 
-					<!--
-						".inner" is set up as an inline-block so it automatically expands
-						in both directions to fit whatever's inside it. This means it won't
-						automatically wrap lines, so be sure to use line breaks where
-						appropriate (<br />).
-					-->
-					<div class="inner">
+      <article id="main">
+        {%
+          include hero_intro.html
+          icon="fa-chart-bar"
+          heading="A community index of <strong>galaxy shape catalogs</strong>"
+          blurb="echo-IA is building a unified pipeline for Intrinsic Alignment (IA) analyses. Our first step: a clear, comparable list of public shape catalogs with stable links and minimal metadata."
+        %}
 
-						<header>
-							<h2>TWENTY</h2>
-						</header>
-						<p>This is <strong>Twenty</strong>, a free
-						<br />
-						responsive template
-						<br />
-						by <a href="http://html5up.net">HTML5 UP</a>.</p>
-						<footer>
-							<ul class="buttons stacked">
-								<a href="#about" class="button fit scrolly">Tell Me More</a>
-							</ul>
-						</footer>
+        {% include_relative pages/_partials/about_block.html %}
+      </article>
 
-					</div>
+      {% include footer.html %}
+    </div>
 
-				</section>
-
-			<!-- Main -->
-				<article id="main">
-
-					<header class="special container">
-						<span class="icon solid fa-chart-bar"></span>
-						<h2>As this is my <strong>twentieth</strong> freebie for HTML5 UP
-						<br />
-						I decided to give it a really creative name.</h2>
-						<p>Turns out <strong>Twenty</strong> was the best I could come up with. Anyway, lame name aside,
-						<br />
-						it's minimally designed, fully responsive, built on HTML5/CSS3,
-						and, like all my stuff,
-						<br />
-						released for free under the <a href="http://html5up.net/license">Creative Commons Attribution 3.0</a> license. Have fun!</p>
-					</header>
-
-					<!-- One -->
-						<section id="about" class="wrapper style4 container">
-						  <div class="content">
-							<section>
-							  <header><h3>About echoIA</h3></header>
-							  <p>
-								<strong>echoIA</strong> (Enabling Cosmology with Homogenized Observations of Intrinsic Alignments)
-								  is a community effort to build a unified pipeline for
-								<em>Intrinsic Alignment</em> (IA) analyses. Our first step is simple but powerful:
-								collect publicly available <strong>galaxy shape catalogs</strong> in one place with
-								clean links and minimal, comparable metadata so everyone can quickly see what’s out there.
-							  </p>
-							  <p>
-								Shape catalogs provide per-galaxy shape measurements (e.g., ellipticities/shear) plus
-								basic context like redshifts and flags. We don’t host data—each catalog stays at its
-								original home (often a DOI on Zenodo or a survey repo)—we just make discovery fast and
-								comparisons fair.
-							  </p>
-							  <ul>
-								<li><strong>Browse:</strong> curated index of public catalogs with licensing notes</li>
-								<li><strong>Compare:</strong> consistent, high-level fields across releases</li>
-								<li><strong>Contribute:</strong> community submissions keep the index fresh</li>
-							  </ul>
-							  <ul class="buttons">
-								<li><a class="button primary" href="{{ '/catalogs/' | relative_url }}">Browse catalogs</a></li>
-								<li><a class="button" href="{{ '/submit/' | relative_url }}">Submit a catalog</a></li>
-							  </ul>
-							</section>
-						  </div>
-						</section>
-
-				</article>
-
-			<!-- Footer -->
-				{% include footer.html %}
-
-		</div>
-
-		<!-- Scripts -->
-			{% include scripts.html %}
-
+    {% include scripts.html %}
   </body>
 </html>

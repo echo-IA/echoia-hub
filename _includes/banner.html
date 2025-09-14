@@ -1,0 +1,19 @@
+<section id="banner">
+  <div class="inner">
+    <header>
+      <h2>{{ include.title | default: "echo-IA" }}</h2>
+    </header>
+
+    <p>
+      {{ include.lead | default: "A community index of publicly available galaxy shape catalogs." }}
+      <br />
+      {{ include.sublead | default: "Clear links, minimal comparable metadata, faster discovery." }}
+    </p>
+
+    <footer>
+      <ul class="buttons stacked">
+        <li><a href="#about" class="button fit scrolly">{{ include.cta | default: "Tell Me More" }}</a></li>
+      </ul>
+    </footer>
+  </div>
+</section>
