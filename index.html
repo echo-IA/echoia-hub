@@ -15,13 +15,13 @@ permalink: /
     <div id="page-wrapper">
 
       <!-- This is my header -->
-      {% include header.html active='home' %}
+        {% include header.html active='home' %}
 
       <!-- This is my banner -->
-      {% include banner.html %}
+        {% include banner.html title='Shape Catalogs' byline='echoIA Community' %}
 
-      <!-- This is my mini intro -->
-      {% include intro.html %}
+      <!-- This is my home intro -->
+        {% include_relative pages/_partials/home_intro.html %}
 
       <!-- This is my about block -->
         {% include_relative pages/_partials/about_block.html %}

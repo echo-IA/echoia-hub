@@ -17,10 +17,7 @@ permalink: /catalogs/
       {% include header.html active='catalogs' %}
 
       <article id="main">
-        {% include hero_intro.html
-           icon='fa-table'
-           heading='Browse <strong>public galaxy shape catalogs</strong>'
-           blurb='Click a row to see details: redshift/shape sources, area, counts, aux columns, and notes.' %}
+        {% include_relative _partials/catalog_intro.html %}
 
         <section class="wrapper style4 container">
           <div class="content">

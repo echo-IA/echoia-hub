@@ -1,0 +1,5 @@
+<header class="special container">
+  <span class="icon {{ include.icon | default: 'fa-database' }}"></span>
+  {% if include.heading %}<h2>{{ include.heading }}</h2>{% endif %}
+  {% if include.blurb %}<p>{{ include.blurb }}</p>{% endif %}
+</header>
