@@ -1,16 +1,16 @@
 <section id="banner">
   <div class="inner">
     <header>
-      <h2>{{ include.title | default: "Shape Catalogs" }}</h2>
+      <h2>{{ include.title | default: "Echo-IA Hub" }}</h2>
       {%- if include.byline or site.banner_byline -%}
         <p class="byline">{{ include.byline | default: site.banner_byline }}</p>
       {%- endif -%}
     </header>
 
     <p>
-      {{ include.lead | default: "An echoIA community index of publicly available galaxy shape catalogs." }}
+      {{ include.lead | default: "A community hub for IA—starting with a curated index of galaxy shape catalogs." }}
       <br />
-      {{ include.sublead | default: "Clear links, minimal comparable metadata, faster discovery." }}
+      {{ include.sublead | default: "Links to Zenodo datasets with minimal comparable metadata for fast discovery." }}
     </p>
 
     <footer>
