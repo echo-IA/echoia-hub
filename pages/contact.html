@@ -1,79 +1,79 @@
+---
+title: "Contact"
+permalink: /contact/
+---
 <!DOCTYPE HTML>
-<!--
-	Twenty by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
-	<head>
-		<title>Contact - Twenty by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="contact is-preload">
-		<div id="page-wrapper">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ page.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+    <noscript><link rel="stylesheet" href="{{ '/assets/css/noscript.css' | relative_url }}" /></noscript>
+  </head>
+  <body class="no-sidebar is-preload">
+    <div id="page-wrapper">
 
-			<!-- Header -->
-				{% include header.html active='about' %}
+      {% include header.html active='contact' %}
 
-			<!-- Main -->
-				<article id="main">
+      <!-- Main -->
+      <article id="main">
+        <header class="special container">
+          <span class="icon solid fa-envelope"></span>
+          <h2>Get in Touch</h2>
+          <p>Questions, corrections, collaborations — we’d love to hear from you.</p>
+        </header>
 
-					<header class="special container">
-						<span class="icon solid fa-envelope"></span>
-						<h2>Get In Touch</h2>
-						<p>Use the form below to give /dev/null a piece of your mind.</p>
-					</header>
+        <!-- Contact -->
+        <section class="wrapper style4 special container medium">
+          <div class="content">
+            <!-- Simple mailto form (static-site friendly).
+                 Replace the address below with your real email. -->
+            <form action="mailto:echoia@yourdomain.org" method="post" enctype="text/plain">
+              <div class="row gtr-50">
+                <div class="col-6 col-12-mobile">
+                  <input type="text" name="Name" placeholder="Name" />
+                </div>
+                <div class="col-6 col-12-mobile">
+                  <input type="email" name="Email" placeholder="Email" />
+                </div>
+                <div class="col-12">
+                  <input type="text" name="Subject" placeholder="Subject" />
+                </div>
+                <div class="col-12">
+                  <textarea name="Message" placeholder="Message" rows="7"></textarea>
+                </div>
+                <div class="col-12">
+                  <ul class="buttons">
+                    <li><input type="submit" class="special" value="Send Email" /></li>
+                    <li><input type="reset" value="Clear" /></li>
+                  </ul>
+                </div>
+              </div>
+            </form>
 
-					<!-- One -->
-						<section class="wrapper style4 special container medium">
+            <hr />
 
-							<!-- Content -->
-								<div class="content">
-									<form>
-										<div class="row gtr-50">
-											<div class="col-6 col-12-mobile">
-												<input type="text" name="name" placeholder="Name" />
-											</div>
-											<div class="col-6 col-12-mobile">
-												<input type="text" name="email" placeholder="Email" />
-											</div>
-											<div class="col-12">
-												<input type="text" name="subject" placeholder="Subject" />
-											</div>
-											<div class="col-12">
-												<textarea name="message" placeholder="Message" rows="7"></textarea>
-											</div>
-											<div class="col-12">
-												<ul class="buttons">
-													<li><input type="submit" class="special" value="Send Message" /></li>
-												</ul>
-											</div>
-										</div>
-									</form>
-								</div>
+            <p>
+              Prefer GitHub? Open an issue:
+              <a target="_blank" rel="noopener"
+                 href="https://github.com/echo-IA/shape-catalogs/issues/new?title=Contact:%20&body=Your%20message:">echo-IA/shape-catalogs issues</a>
+            </p>
+          </div>
+        </section>
+      </article>
 
-						</section>
+      {% include footer.html %}
+    </div>
 
-				</article>
-
-			<!-- Footer -->
-				{% include footer.html %}
-
-		</div>
-
-		<!-- Scripts -->
-			<script src="../assets/js/jquery.min.js"></script>
-			<script src="../assets/js/jquery.dropotron.min.js"></script>
-			<script src="../assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollgress.min.js"></script>
-			<script src="../assets/js/jquery.scrollex.min.js"></script>
-			<script src="../assets/js/browser.min.js"></script>
-			<script src="../assets/js/breakpoints.min.js"></script>
-			<script src="../assets/js/util.js"></script>
-			<script src="../assets/js/main.js"></script>
-
-	</body>
+    <script src="{{ '/assets/js/jquery.min.js' | relative_url }}"></script>
+    <!-- If you're not using dropdown menus, omit Dropotron -->
+    <!-- <script src="{{ '/assets/js/jquery.dropotron.min.js' | relative_url }}"></script> -->
+    <script src="{{ '/assets/js/jquery.scrolly.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/jquery.scrollex.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/browser.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/breakpoints.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/util.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  </body>
 </html>
