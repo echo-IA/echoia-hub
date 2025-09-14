@@ -9,8 +9,10 @@ metadata_license_url: "https://creativecommons.org/publicdomain/zero/1.0/"
 code_license_name: "MIT"
 code_license_url: "https://opensource.org/license/mit"
 
-url: "https://echo-ia.github.io"   # your user/org site
-baseurl: "/shape-catalogs"         # your project repo name
+zenodo_community_url: "https://zenodo.org/communities/echo-ia"  #
+
+url: "https://echo-ia.github.io"   # my user/org site
+baseurl: "/shape-catalogs"         # my project repo name
 permalink: pretty                  # makes /page/ instead of /page.html
 
 defaults:
