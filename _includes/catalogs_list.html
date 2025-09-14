@@ -1,0 +1,132 @@
+{%- assign data_path = include.data_path | default: '/data/catalogs.csv' -%}
+{%- assign container_id = include.container_id | default: 'catalogs-list' -%}
+{%- assign empty_id = include.empty_id | default: 'catalogs-empty' -%}
+
+<section class="wrapper style4 container">
+  <div class="content">
+    <div id="{{ container_id }}"></div>
+    <p id="{{ empty_id }}" style="display:none;">No catalogs yet.</p>
+  </div>
+</section>
+
+<script>
+(function() {
+  const dataUrl = "{{ data_path | relative_url }}";
+  const containerId = "{{ container_id }}";
+  const emptyId = "{{ empty_id }}";
+
+  // Simple HTML escaper
+  const esc = (s) => (s || '').toString().replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Papa === 'undefined') {
+      console.error('PapaParse not loaded. Pass papaparse=true to scripts include.');
+      document.getElementById(emptyId).style.display = 'block';
+      return;
+    }
+
+    Papa.parse(dataUrl, {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: ({ data }) => renderCatalogs(data),
+      error: (err) => {
+        console.error('CSV load error:', err);
+        document.getElementById(emptyId).style.display = 'block';
+      }
+    });
+  });
+
+  function renderCatalogs(rows) {
+    const wrap = document.getElementById(containerId);
+    if (!rows || !rows.length) {
+      document.getElementById(emptyId).style.display = 'block';
+      return;
+    }
+
+    wrap.innerHTML = rows.map(r => {
+      // Be forgiving about header names
+      const name    = esc(r.name || r.sample || 'Untitled');
+      const survey  = esc(r.survey || r['redshift source'] || '');
+      const ztype   = esc(r.redshift_type || r['redshift type'] || r.photo_vs_spec || r['photo vs spec'] || '');
+      const shape   = esc(r.shape_measurement || r['shape source'] || '');
+      const area    = esc(r.sky_area_deg2 || r['sky area'] || '');
+      const nClust  = esc(r.n_gal_clustering || r['number of objects for clustering'] || '');
+      const nShapes = esc(r.n_gal_shapes || r['number of objects for shapes'] || '');
+      const aux     = esc(r.aux_info || r['auxiliary info'] || '');
+      const license = esc(r.license || '');
+      const doiRaw  = (r.doi || '').trim();
+      const linkRaw = (r.link || '').trim();
+      const doiHref = doiRaw ? `https://doi.org/${esc(doiRaw)}` : '';
+
+      const linkHtml = [
+        doiRaw  ? `<a class="ext" target="_blank" rel="noopener" href="${doiHref}">DOI</a>` : '',
+        linkRaw ? `<a class="ext" target="_blank" rel="noopener" href="${esc(linkRaw)}">Data</a>` : ''
+      ].filter(Boolean).join(' · ');
+
+      const metaBits = [
+        survey,
+        ztype ? `${ztype}` : '',
+        area ? `${area} deg²` : '',
+        nShapes ? `shapes: ${nShapes}` : ''
+      ].filter(Boolean).join(' · ');
+
+      return `
+<details class="catalog">
+  <summary>
+    <span class="name">${name}${linkHtml ? ` <span class="ext">· ${linkHtml}</span>` : ''}</span>
+    <span class="meta">${metaBits}</span>
+  </summary>
+  <div class="catalog-details">
+    <div class="cols">
+      <div>
+        <h5>Redshift source</h5>
+        <div>${survey}${ztype ? ` (${ztype})` : ''}</div>
+      </div>
+      <div>
+        <h5>Shape source</h5>
+        <div>${shape}</div>
+      </div>
+      <div>
+        <h5>Sky area</h5>
+        <div>${area ? `${area} deg²` : ''}</div>
+      </div>
+      <div>
+        <h5>Objects (clustering)</h5>
+        <div>${nClust}</div>
+      </div>
+      <div>
+        <h5>Objects (shapes)</h5>
+        <div>${nShapes}</div>
+      </div>
+      <div>
+        <h5>Auxiliary info</h5>
+        <div>${ax(aux)}</div>
+      </div>
+      <div>
+        <h5>License</h5>
+        <div>${license}</div>
+      </div>
+      ${r.notes ? `
+      <div style="grid-column: 1 / -1;">
+        <h5>Notes</h5>
+        <div>${esc(r.notes)}</div>
+      </div>` : ''}
+      <div class="links" style="grid-column: 1 / -1;">
+        ${linkHtml}
+      </div>
+    </div>
+  </div>
+</details>`;
+    }).join('');
+  }
+
+  // light touch to make aux lists nicer
+  function ax(s) {
+    const t = (s || '').trim();
+    if (!t) return '';
+    // turn comma lists into nicer comma+space
+    return esc(t.replace(/\s*,\s*/g, ', '));
+  }
+})();
+</script>
