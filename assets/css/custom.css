@@ -84,4 +84,33 @@ details.catalog .links {
 .catalog-filters .cf-range { display:flex; align-items:center; gap:.4rem; }
 .catalog-filters .cf-range input[type="number"] { width:6rem; padding:.35rem .5rem; border-radius:.5rem; border:1px solid rgba(255,255,255,.2); }
 
+/* --- Catalogs banner: make all text white --- */
+
+/* Option A (recommended): darker translucent card + white text */
+#banner .inner {
+  background: rgba(0, 0, 0, 0.35) !important;  /* tint; tweak 0.25–0.50 */
+  color: #fff !important;
+}
+
+/* Inherit white for everything inside */
+#banner .inner h2,
+#banner .inner p,
+#banner .inner .byline,
+#banner .inner a,
+#banner .inner strong,
+#banner .inner em,
+#banner .inner li,
+#banner .inner span {
+  color: #fff !important;
+}
+
+/* Borders/buttons to match */
+#banner .inner header,
+#banner .inner header h2 { border-color: rgba(255,255,255,0.6) !important; }
+#banner .inner .button { color:#fff !important; border-color: rgba(255,255,255,0.6) !important; }
+#banner .inner .button:hover { background: rgba(255,255,255,0.12) !important; }
+
+/* If you really want to keep a white card, use this instead of the block above:
+#banner .inner { background: rgba(255,255,255,0.35) !important; color:#fff !important; }
+*/
 
