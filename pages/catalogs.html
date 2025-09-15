@@ -20,13 +20,38 @@ permalink: /catalogs/
 
       {% include header.html active='catalogs' %}
 
+      <!-- Catalogs page banner -->
+      <section id="banner">
+        <div class="inner">
+          <header>
+            <h2>Shape Catalogs</h2>
+            <p class="byline">echo-IA Community</p>
+          </header>
+
+          <p>
+            A curated index of public <strong>galaxy shape catalogs</strong> with clean links and comparable metadata.
+            <br />
+            Hosting/mirroring on <strong>Zenodo</strong> where licensing allows; always crediting original sources.
+          </p>
+
+          <ul class="buttons">
+            <li><a class="button primary" href="#catalogs-list">Browse catalogs</a></li>
+            <li><a class="button" href="{{ '/submit/' | relative_url }}">Submit a catalog</a></li>
+            {% if site.zenodo_community_url %}
+              <li><a class="button" href="{{ site.zenodo_community_url }}" target="_blank" rel="noopener">Zenodo collection</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </section>
+
       <article id="main">
         {% include_relative _partials/catalogs_intro.html %}
 
         <!-- Expandable catalogs list from CSV -->
+        {% comment %} container_id default is "catalogs-list" (matches banner link) {% endcomment %}
         {% include catalogs_list.html data_key='catalogs' %}
 
-        <!-- Small feature row (optional, keep or remove) -->
+        <!-- Small feature row -->
         <section class="wrapper style1 container special">
           <div class="row">
             <div class="col-4 col-12-narrower">
