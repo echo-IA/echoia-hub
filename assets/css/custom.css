@@ -71,3 +71,16 @@ details.catalog .links {
   margin-top: 0.35rem;
   font-size: 0.95em;
 }
+
+/* White, semi-transparent banner card */
+#banner .inner .button { color:#111 !important; border-color: rgba(0,0,0,0.25) !important; }
+#banner .inner .button:hover { background: rgba(0,0,0,0.06) !important; }
+
+/* Tweak borders + text inside the banner */
+#banner .inner header,
+#banner .inner header h2 { border-color: rgba(0,0,0,0.25) !important; }
+
+#banner .inner p,
+#banner .inner .byline,
+#banner .inner a { color: #111 !important; }
+
