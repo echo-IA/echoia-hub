@@ -84,3 +84,16 @@ details.catalog .links {
 #banner .inner .byline,
 #banner .inner a { color: #111 !important; }
 
+/* Filters UI */
+.catalog-filters .cf-row { display:flex; gap:.75rem; flex-wrap:wrap; align-items:center; margin:.5rem 0; }
+.catalog-filters input[type="search"] { flex:1 1 240px; padding:.5rem .6rem; border-radius:.5rem; border:1px solid rgba(255,255,255,.2); }
+.catalog-filters .button.small { padding:.35rem .6rem; border-radius:.5rem; }
+
+.catalog-filters .cf-group { min-width: 220px; }
+.catalog-filters .cf-label { display:block; font-size:.9em; opacity:.85; margin-bottom:.25rem; }
+.catalog-filters .cf-chips { display:flex; gap:.6rem .9rem; flex-wrap:wrap; }
+.catalog-filters .cf-chips label { display:flex; gap:.35rem; align-items:center; cursor:pointer; }
+.catalog-filters .cf-range { display:flex; align-items:center; gap:.4rem; }
+.catalog-filters .cf-range input[type="number"] { width:6rem; padding:.35rem .5rem; border-radius:.5rem; border:1px solid rgba(255,255,255,.2); }
+
+
