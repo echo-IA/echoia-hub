@@ -114,3 +114,73 @@ details.catalog .links {
 #banner .inner { background: rgba(255,255,255,0.35) !important; color:#fff !important; }
 */
 
+/* ==== Brand color overrides (#322234) ==== */
+
+/* Links */
+a {
+  color: #322234 !important;
+  border-bottom-color: currentColor;
+}
+a:hover { background: rgba(50,34,52,0.06); }
+
+/* Primary buttons */
+.button.primary,
+input[type="button"].primary,
+input[type="submit"].primary,
+input[type="reset"].primary,
+button.primary {
+  background: #322234 !important;
+  border-color: #322234 !important;
+  color: #fff !important;
+}
+.button.primary:hover,
+input[type="button"].primary:hover,
+input[type="submit"].primary:hover,
+input[type="reset"].primary:hover,
+button.primary:hover {
+  background: #3f2a56 !important;   /* subtle hover */
+  border-color: #3f2a56 !important;
+}
+
+/* Default button hover tint */
+.button:hover { background: rgba(50,34,52,0.12) !important; }
+
+/* Inputs (focus ring) */
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  border-color: #322234 !important;
+}
+
+/* Dropdown (nav) hover */
+.dropotron > li:hover > a {
+  background: #322234 !important;
+  color: #fff !important;
+}
+
+/* Header nav hover (desktop) */
+#header nav ul li.active > a,
+#header nav ul li:hover > a {
+  background: rgba(50,34,52,0.12) !important;
+}
+
+/* Teal section replacement (optional): use brand instead of teal */
+.wrapper.style2 {
+  background-color: #322234 !important;
+  color: #fff !important;
+}
+/* Keep the inverted primary button inside style2 */
+.wrapper.style2 .button.primary {
+  background: #fff !important;
+  border-color: #fff !important;
+  color: #322234 !important;
+}
+/* Links inside style2 should stay readable (white) */
+.wrapper.style2 a {
+  color: #fff !important;
+  border-bottom-color: rgba(255,255,255,0.6) !important;
+}
+
+#banner { background-color: #322234 !important; }
+
