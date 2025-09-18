@@ -11,9 +11,9 @@ code_license_url: "https://opensource.org/license/mit"
 
 zenodo_community_url: "https://zenodo.org/communities/echo-ia"  #
 
-url: "https://echo-ia.github.io"   # my user/org site
-baseurl: "/echoia-hub"         # my project repo name
-permalink: pretty                  # makes /page/ instead of /page.html
+url: "https://echoia.org"   # my user/org site
+baseurl: ""  # important: empty for domain root
+permalink: pretty
 
 defaults:
   - scope:
