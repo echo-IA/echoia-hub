@@ -184,3 +184,7 @@ textarea:focus {
 
 #banner { background-color: #322234 !important; }
 
+/* override HTML5 UP */
+.buttons.stacked .button,
+.button.fit { width: auto; }
+

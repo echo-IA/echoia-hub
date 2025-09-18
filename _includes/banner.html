@@ -5,16 +5,14 @@
       <p class="byline">{{ include.byline | default: "Intrinsic Alignments, end-to-end." }}</p>
     </header>
 
-    <p>
-      {{ include.lead | default: "A community hub for IA research: catalogs, datasets, code, workshops, and results." }}
-      <br />
-      {{ include.sublead | default: "Discover shape catalogs, follow active projects, join meetings, and contribute tooling—all in one place." }}
-    </p>
+    <p>{{ include.lead | default: "A community hub for IA research: catalogs, datasets, code, workshops, and results." }}</p>
+    <p>{{ include.sublead | default: "Discover shape catalogs, follow active projects, join meetings, and contribute tooling—all in one place." }}</p>
 
     <footer>
-      <ul class="buttons stacked">
-        <li><a href="#about" class="button fit scrolly">{{ include.cta | default: "Tell me more" }}</a></li>
+      <ul class="buttons">
+        <li><a href="#about" class="button scrolly">{{ include.cta | default: "Tell me more" }}</a></li>
       </ul>
     </footer>
+
   </div>
 </section>
