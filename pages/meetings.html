@@ -1,0 +1,104 @@
+---
+title: "Meetings"
+permalink: /meetings/
+layout: none
+---
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ page.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+    <noscript><link rel="stylesheet" href="{{ '/assets/css/noscript.css' | relative_url }}" /></noscript>
+  </head>
+  <body class="no-sidebar is-preload">
+    <div id="page-wrapper">
+
+      {% include header.html active='meetings' %}
+
+      <article id="main">
+        <header class="special container">
+          <span class="icon regular fa-calendar-days"></span>
+          <h2>echoIA <strong>Meetings & Workshops</strong></h2>
+          <p>How we meet and links to previous events.</p>
+        </header>
+
+        <section class="wrapper style4 container">
+          <div class="content">
+
+            <!-- How we meet -->
+            <section>
+              <header><h3>How we meet</h3></header>
+              <ul>
+                <li><strong>Cadence:</strong> 3–4 community check-ins per year on Zoom, plus one in-person workshop annually.</li>
+                <li><strong>Format:</strong> short round-table updates → focused co-working → quick wrap-up.</li>
+                <li><strong>Scope:</strong> IA measurements, modeling, pipelines, datasets, and survey coordination.</li>
+              </ul>
+              <p><em>Joining details TBA—Mattermost and videoconference links will be posted here once set up.</em></p>
+            </section>
+
+            <!-- Upcoming -->
+            <section>
+              <header><h3>Upcoming/Current</h3></header>
+              <div class="feature-list">
+                <section>
+                  <h4>CAROLINA Workshop (ongoing)</h4>
+                  <p>
+                    <strong>When:</strong> September 15–19, 2025<br>
+                    <strong>Where:</strong> Duke University, Durham, NC<br>
+                    <strong>What:</strong> echo-IA working sessions on IA measurements, modeling, and pipelines.
+                  </p>
+
+                  <ul class="buttons">
+                    <li><a class="button" href="{{ '/CAROLINA/' | relative_url }}">Workshop page</a></li>
+                    <li><a class="button" href="{{ '/CAROLINA/schedule/' | relative_url }}">Schedule</a></li>
+                    <li><a class="button" href="{{ '/CAROLINA/participants/' | relative_url }}">Participants</a></li>
+                    <!-- If you later add notes:
+                    <li><a class="button" href="{{ '/CAROLINA/notes/' | relative_url }}">Notes</a></li>
+                    -->
+                  </ul>
+
+                  <p><em>Live details and notes will be posted here during the event.</em></p>
+                </section>
+              </div>
+            </section>
+
+            <!-- Past workshops / meetings -->
+            <section>
+              <header><h3>Previous echo-IA workshops</h3></header>
+              <ul class="alt">
+                <li>
+                  <strong>2024</strong> —
+                  <a href="{{ '/LILAC/' | relative_url }}" target="_blank" rel="noopener">
+                    LILAC: Linking Intrinsic Alignments Across Collaborations
+                  </a>
+                  (Harvard University)
+                </li>
+                <li>
+                  <strong>2023</strong> —
+                  <a href="https://www.lorentzcenter.nl/hol-ia-a-holistic-approach-to-galaxy-intrinsic-alignments.html" target="_blank" rel="noopener">
+                    hol-IA: a holistic approach to galaxy intrinsic alignments
+                  </a>
+                  (Leiden University)
+                </li>
+                <li>
+                  <strong>2022</strong> —
+                  <a href="{{ '/FebKickoff/' | relative_url }}" target="_blank" rel="noopener">
+                    echo-IA Kickoff Workshop
+                  </a>
+                  (online)
+                </li>
+              </ul>
+            </section>
+
+          </div>
+        </section>
+      </article>
+
+      {% include footer.html %}
+    </div>
+
+    {% include scripts.html %}
+  </body>
+</html>

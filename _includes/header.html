@@ -11,6 +11,9 @@
       <li class="{% if include.active == 'catalogs' %}current{% endif %}">
         <a href="{{ '/catalogs/' | relative_url }}">Catalogs</a>
       </li>
+      <li class="{% if include.active == 'meetings' %}current{% endif %}">
+        <a href="{{ '/meetings/' | relative_url }}">Meetings</a>
+      </li>
       <li class="{% if include.active == 'submit' %}current{% endif %}">
         <a href="{{ '/submit/' | relative_url }}">Submit</a>
       </li>
