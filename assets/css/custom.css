@@ -222,3 +222,52 @@ textarea:focus {
   padding-left: 0;
 }
 .align-center .buttons li { list-style: none; }
+
+
+/*/
+#banner/* ─────────────────────────────
+   Normalize header/nav everywhere (incl. Home)
+   ───────────────────────────── */
+
+/* Make header solid and on top */
+#header,
+#header.alt {
+  background: #fff !important;
+  position: relative !important;
+  z-index: 1000 !important;
+  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.06);
+}
+
+/* Ensure the logo/text is readable on white */
+#header #logo a,
+#header h1#logo a {
+  color: #322234 !important;
+  border: 0 !important;
+}
+
+/* Some themes hide/fade nav when .alt until scrolled — undo all that */
+#header nav,
+#header nav ul,
+#header nav ul li,
+#header nav ul li a {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+/* Make sure the nav actually shows (desktop) */
+#header nav { display: block !important; }
+
+/* Actual tab/link color on the white header */
+#header nav ul li a {
+  color: #322234 !important;
+  border: 0 !important; /* remove underlines in header */
+}
+
+/* Active/hover state still visible on white */
+#header nav ul li.active > a,
+#header nav ul li:hover > a {
+  background: rgba(50,34,52,0.12) !important; /* your brand tint */
+  color: #322234 !important;
+}
+
