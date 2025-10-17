@@ -8,6 +8,9 @@
       <li>
         <a href="{{ '/#about' | relative_url }}" class="scrolly">About</a>
       </li>
+      <li class="{% if include.active == 'tools' %}current{% endif %}">
+        <a href="{{ '/tools/' | relative_url }}">Tools</a>
+      </li>
       <li class="{% if include.active == 'catalogs' %}current{% endif %}">
         <a href="{{ '/catalogs/' | relative_url }}">Catalogs</a>
       </li>
