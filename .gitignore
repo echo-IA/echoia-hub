@@ -20,3 +20,10 @@ vendor/
 # Node
 /node_modules/
 /.bundle/
+/_site/
+/.jekyll-cache/
+/.jekyll-metadata
+/.sass-cache/
+/.bundle/
+vendor/
+/node_modules/
