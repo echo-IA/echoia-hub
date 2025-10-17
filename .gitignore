@@ -11,6 +11,8 @@
 
 # Bundler / Ruby
 /.bundle/
+**/.bundle/
+
 vendor/
 # (the line above already covers /vendor/bundle/)
 # keep Gemfile + Gemfile.lock tracked!
