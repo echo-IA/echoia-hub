@@ -1,29 +1,33 @@
 <section id="about" class="wrapper style4 container">
   <div class="content">
     <section>
-      <header><h3>About echoIA</h3></header>
+      <header><h3>About echo-IA</h3></header>
 
       <p>
-        <strong>echoIA</strong> (Enabling Cosmology with Homogenized Observations of Intrinsic Alignments) is a community effort to
-        build a unified pipeline for <em>intrinsic alignment</em> research. We start by collecting public <strong>galaxy shape catalogs</strong>
-        in one place with clean links and comparable metadata.
+        <strong>echo-IA</strong> (Enabling Cosmology with Homogenized Observations of Intrinsic Alignments) is a community space
+        for <em>intrinsic alignment</em> research. We bring together catalogs, tools, datasets, and workflows so results are easier
+        to compare, reproduce, and extend.
       </p>
 
       <p>
-        When licensing allows, we will <strong>host or mirror on Zenodo</strong> under an echoIA collection. Each entry tracks provenance,
-        version, license, and citations, and always links to the original source. Otherwise, we point to the official release.
+        Our goal is practical interoperability: lightweight standards, clear provenance, and shared building blocks—so teams can
+        plug in their data or code and get to science faster. When licensing allows, we also <strong>host or mirror on Zenodo</strong>
+        under an echo-IA collection, always linking back to original sources.
       </p>
 
       <ul>
-        <li><strong>Curate:</strong> community-maintained index of public catalogs</li>
-        <li><strong>Host/Mirror:</strong> stable DOIs on Zenodo (where permitted)</li>
-        <li><strong>Standardize:</strong> comparable, high-level fields across releases</li>
-        <li><strong>Credit:</strong> clear licensing & recommended citations</li>
+        <li><strong>Catalogs:</strong> curated, public galaxy-shape catalogs with comparable metadata</li>
+        <li><strong>Tools:</strong> analysis libraries, pipelines, diagnostics, and plotting utilities</li>
+        <li><strong>Workflows:</strong> reproducible paths from inputs to posteriors (configs, CI, examples)</li>
+        <li><strong>Standards:</strong> minimal schemas for fields, units, and metadata; recommended citations</li>
+        <li><strong>Community:</strong> meetings, workshops, and issue trackers for coordination</li>
       </ul>
 
       <ul class="buttons">
         <li><a class="button primary" href="{{ '/catalogs/' | relative_url }}">Browse catalogs</a></li>
-        <li><a class="button" href="{{ '/submit/' | relative_url }}">Submit a catalog</a></li>
+        <li><a class="button" href="{{ '/tools/'    | relative_url }}">Explore tools</a></li>
+        <li><a class="button" href="{{ '/submit/'   | relative_url }}">Contribute</a></li>
+        <li><a class="button" href="{{ '/meetings/' | relative_url }}">Meetings</a></li>
         {% if site.zenodo_community_url %}
           <li><a class="button" href="{{ site.zenodo_community_url }}" target="_blank" rel="noopener">Zenodo collection</a></li>
         {% endif %}
