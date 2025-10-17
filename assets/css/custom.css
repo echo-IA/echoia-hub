@@ -1,10 +1,14 @@
 /* =============================
    echo-IA — custom overrides
+   Place at: assets/css/custom.css
+   (Loaded after main.css)
    ============================= */
 
+
 /* ─────────────────────────────
-   Expandable catalogs
+   1) Expandable catalogs
    ───────────────────────────── */
+
 details.catalog {
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 0.75rem;
@@ -19,9 +23,8 @@ details.catalog > summary {
   gap: 0.75rem;
   align-items: center;
   cursor: pointer;
-  list-style: none;
+  list-style: none; /* hide default marker */
 }
-
 details.catalog > summary::-webkit-details-marker { display: none; }
 
 details.catalog > summary::after {
@@ -29,15 +32,10 @@ details.catalog > summary::after {
   transition: transform 0.2s ease;
   opacity: 0.75;
 }
-
 details.catalog[open] > summary::after { transform: rotate(90deg); }
 
 details.catalog .name { font-weight: 700; }
-
-details.catalog .name .ext {
-  margin-left: 0.4rem;
-  text-decoration: none;
-}
+details.catalog .name .ext { margin-left: 0.4rem; text-decoration: none; }
 
 details.catalog .meta {
   opacity: 0.8;
@@ -56,7 +54,6 @@ details.catalog .cols {
   grid-template-columns: repeat(3, minmax(0,1fr));
   gap: 0.75rem 1rem;
 }
-
 @media (max-width: 900px) {
   details.catalog .cols { grid-template-columns: 1fr; }
 }
@@ -66,18 +63,20 @@ details.catalog h5 {
   font-size: 0.95em;
   opacity: 0.9;
 }
-
 details.catalog .links {
   margin-top: 0.35rem;
   font-size: 0.95em;
 }
 
+
 /* ─────────────────────────────
-   Catalogs – filters UI
+   2) Catalogs – filters UI
    ───────────────────────────── */
+
 .catalog-filters .cf-row { display:flex; gap:.75rem; flex-wrap:wrap; align-items:center; margin:.5rem 0; }
 .catalog-filters input[type="search"] { flex:1 1 240px; padding:.5rem .6rem; border-radius:.5rem; border:1px solid rgba(255,255,255,.2); }
 .catalog-filters .button.small { padding:.35rem .6rem; border-radius:.5rem; }
+
 .catalog-filters .cf-group { min-width: 220px; }
 .catalog-filters .cf-label { display:block; font-size:.9em; opacity:.85; margin-bottom:.25rem; }
 .catalog-filters .cf-chips { display:flex; gap:.6rem .9rem; flex-wrap:wrap; }
@@ -85,17 +84,20 @@ details.catalog .links {
 .catalog-filters .cf-range { display:flex; align-items:center; gap:.4rem; }
 .catalog-filters .cf-range input[type="number"] { width:6rem; padding:.35rem .5rem; border-radius:.5rem; border:1px solid rgba(255,255,255,.2); }
 
+
 /* ─────────────────────────────
-   Banner: keep translucent card + force white text
+   3) Banner: translucent card + white text
    ───────────────────────────── */
+
+/* Optional solid brand tint behind the banner image (adjust/remove as you like) */
 #banner { background-color: #322234 !important; }
 
 #banner .inner {
-  background: rgba(0, 0, 0, 0.35) !important;  /* tweak alpha 0.25–0.50 */
-  color: #fff !important;
+  background: rgba(0, 0, 0, 0.35);   /* tweak alpha 0.25–0.50 */
+  color: #fff;
   border-radius: 1rem;
   padding: 2rem 2.25rem;
-  /* backdrop-filter: blur(6px); */ /* optional glass effect */
+  /* backdrop-filter: blur(6px); */   /* optional glass effect */
 }
 
 #banner .inner h1,
@@ -130,26 +132,26 @@ details.catalog .links {
 #banner .inner header,
 #banner .inner header h2 { border-color: rgba(255,255,255,0.6) !important; }
 
-/* ─────────────────────────────
-   Header: keep solid white everywhere (even on Home)
-   ───────────────────────────── */
-#header {
-  background: #fff !important;
-}
-
-#header.alt {
-  background: #fff !important;
-  position: relative !important;
-  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.06);
-}
-
-#header a { color: inherit !important; }
-#header.alt::before,
-#header.alt::after { content: none !important; background: none !important; }
 
 /* ─────────────────────────────
-   Brand color overrides (global)
+   4) Navigation weights (bold only on current tab)
    ───────────────────────────── */
+
+#header nav ul li a {
+  font-weight: 500 !important;   /* 400 = lighter, 500 = medium */
+}
+#header nav ul li.current > a,
+#header nav ul li.active  > a,
+#header nav ul li a[aria-current="page"] {
+  font-weight: 700 !important;   /* bold on active tab only */
+}
+#header nav ul li a:hover { font-weight: inherit !important; } /* prevent hover reflow */
+
+
+/* ─────────────────────────────
+   5) Brand color overrides (global)
+   ───────────────────────────── */
+
 a {
   color: #322234 !important;
   border-bottom-color: currentColor;
@@ -193,24 +195,11 @@ textarea:focus {
   background: rgba(50,34,52,0.12) !important;
 }
 
-/* Inverted brand section */
-.wrapper.style2 {
-  background-color: #322234 !important;
-  color: #fff !important;
-}
-.wrapper.style2 .button.primary {
-  background: #fff !important;
-  border-color: #fff !important;
-  color: #322234 !important;
-}
-.wrapper.style2 a {
-  color: #fff !important;
-  border-bottom-color: rgba(255,255,255,0.6) !important;
-}
 
 /* ─────────────────────────────
-   Small UX polish
+   6) Small UX polish
    ───────────────────────────── */
+
 .buttons.stacked .button,
 .button.fit { width: auto; }
 
@@ -222,52 +211,3 @@ textarea:focus {
   padding-left: 0;
 }
 .align-center .buttons li { list-style: none; }
-
-
-/*/
-#banner/* ─────────────────────────────
-   Normalize header/nav everywhere (incl. Home)
-   ───────────────────────────── */
-
-/* Make header solid and on top */
-#header,
-#header.alt {
-  background: #fff !important;
-  position: relative !important;
-  z-index: 1000 !important;
-  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.06);
-}
-
-/* Ensure the logo/text is readable on white */
-#header #logo a,
-#header h1#logo a {
-  color: #322234 !important;
-  border: 0 !important;
-}
-
-/* Some themes hide/fade nav when .alt until scrolled — undo all that */
-#header nav,
-#header nav ul,
-#header nav ul li,
-#header nav ul li a {
-  opacity: 1 !important;
-  visibility: visible !important;
-  transform: none !important;
-}
-
-/* Make sure the nav actually shows (desktop) */
-#header nav { display: block !important; }
-
-/* Actual tab/link color on the white header */
-#header nav ul li a {
-  color: #322234 !important;
-  border: 0 !important; /* remove underlines in header */
-}
-
-/* Active/hover state still visible on white */
-#header nav ul li.active > a,
-#header nav ul li:hover > a {
-  background: rgba(50,34,52,0.12) !important; /* your brand tint */
-  color: #322234 !important;
-}
-
