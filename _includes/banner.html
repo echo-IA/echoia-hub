@@ -1,8 +1,13 @@
+{% assign banner_title   = include.title    | default: page.banner_title  | default: page.title | default: site.title | default: "echoIA Hub" %}
+{% assign banner_byline  = include.byline   | default: page.banner_byline | default: site.tagline | default: "Intrinsic Alignments, end-to-end." %}
+{% assign banner_cta     = include.cta      | default: page.banner_cta    | default: "Tell me more" %}
+{% assign banner_cta_url = include.cta_url  | default: page.banner_cta_url | default: "/#about" %}
+
 <section id="banner">
   <div class="inner">
     <header>
-      <h2>{{ include.title | default: "echoIA Hub" }}</h2>
-      <p class="byline">{{ include.byline | default: "Intrinsic Alignments, end-to-end." }}</p>
+      <h2>{{ banner_title }}</h2>
+      <p class="byline">{{ banner_byline }}</p>
     </header>
 
     <p>A hub for Intrinsic Alignment research</p>
@@ -11,9 +16,8 @@
 
     <footer>
       <ul class="buttons">
-        <li><a href="#about" class="button scrolly">{{ include.cta | default: "Tell me more" }}</a></li>
+        <li><a href="{{ banner_cta_url }}" class="button scrolly">{{ banner_cta }}</a></li>
       </ul>
     </footer>
-
   </div>
 </section>

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ page.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+    <noscript><link rel="stylesheet" href="{{ '/assets/css/noscript.css' | relative_url }}" /></noscript>
+  </head>
+  <body class="{{ page.body_class | default: 'no-sidebar is-preload' }}">
+    <div id="page-wrapper">
+      {% include header.html active=page.nav_key | default: 'home' %}
+
+      {% if page.show_banner != false %}
+        {% include banner.html
+          title=page.banner_title
+          byline=page.banner_byline
+          cta=page.banner_cta
+          cta_url=page.banner_cta_url %}
+      {% endif %}
+
+      <article id="main">
+        {{ content }}
+      </article>
+
+      {% include footer.html %}
+    </div>
+    {% include scripts.html %}
+  </body>
+</html>

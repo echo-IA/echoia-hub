@@ -1,0 +1,28 @@
+- title: Home
+  url: /
+  key: home
+
+- title: About
+  url: /#about
+  key: about
+  scrolly: true   # special: anchor on home
+
+- title: Tools
+  url: /tools/
+  key: tools
+
+- title: Catalogs
+  url: /catalogs/
+  key: catalogs
+
+- title: Submit
+  url: /submit/
+  key: submit
+
+- title: Meetings
+  url: /meetings/
+  key: meetings
+
+- title: Contact
+  url: /contact/
+  key: contact

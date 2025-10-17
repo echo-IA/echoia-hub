@@ -1,7 +1,16 @@
 ---
 title: "Home"
 permalink: /
+layout: page
+nav_key: home
+banner_title: "echo-IA"
+banner_byline: "echo-IA Community"
+banner_cta: "Tell me more"
+banner_cta_url: "/#about"
 ---
+{% include partials/home_intro.html %}
+{% include partials/about_block.html %}
+
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -14,22 +23,19 @@ permalink: /
   <body class="index is-preload">
     <div id="page-wrapper">
 
-      <!-- This is my header -->
-        {% include header.html active='home' %}
+      {% include header.html active='home' %}
 
-      <!-- This is my banner -->
-        {% include banner.html title='echo-IA' byline='echo-IA Community' %}
+      {% include banner.html title='echo-IA' byline='echo-IA Community' %}
 
-      <!-- This is my home intro -->
-        {% include_relative pages/_partials/home_intro.html %}
+      <article id="main">
+        {% include partials/home_intro.html %}
 
-      <!-- This is my about block -->
-        {% include_relative pages/_partials/about_block.html %}
+        {# ensure this partial’s top element has id="about" #}
+        {% include partials/about_block.html %}
       </article>
 
       {% include footer.html %}
     </div>
-
     {% include scripts.html %}
   </body>
 </html>
