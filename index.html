@@ -3,7 +3,16 @@ title: "Home"
 permalink: /
 layout: page
 nav_key: home
-show_banner: false
+
+# Show the layout banner:
+show_banner: true
+
+# Banner text:
+banner_title: "echo-IA"
+banner_byline: "echo-IA Community"
+banner_cta: "Tell me more"
+banner_cta_url: "/about/"
 ---
-{% include partials/intro_block.html %}
+
+{% comment %} Use only the teaser; no intro_block so there's no double hero. {% endcomment %}
 {% include partials/teaser_block.html %}
