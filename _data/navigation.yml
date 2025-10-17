@@ -3,9 +3,9 @@
   key: home
 
 - title: About
-  url: /#about
+  url: /about/
   key: about
-  scrolly: true   # special: anchor on home
+  #scrolly: true   # special: anchor on home
 
 - title: Tools
   url: /tools/
