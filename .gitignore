@@ -1,8 +1,19 @@
+# IDE / OS
 .idea/
-.ipynb_checkpoints
+.ipynb_checkpoints/
+.DS_Store
 
-# IDE
-.idea/
+# Jekyll build + caches
+/_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
 
-/vendor/bundle/
+# Bundler / Ruby
+/.bundle/
+vendor/
+# (the line above already covers /vendor/bundle/)
+# keep Gemfile + Gemfile.lock tracked!
 
+# Node
+/node_modules/
