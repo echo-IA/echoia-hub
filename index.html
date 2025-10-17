@@ -3,39 +3,7 @@ title: "Home"
 permalink: /
 layout: page
 nav_key: home
-banner_title: "echo-IA"
-banner_byline: "echo-IA Community"
-banner_cta: "Tell me more"
-banner_cta_url: "/about/"
+show_banner: false
 ---
-
 {% include partials/intro_block.html %}
 {% include partials/teaser_block.html %}
-
-
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>{{ page.title }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
-    <noscript><link rel="stylesheet" href="{{ '/assets/css/noscript.css' | relative_url }}" /></noscript>
-  </head>
-  <body class="index is-preload">
-    <div id="page-wrapper">
-
-      {% include header.html active='home' %}
-
-      {% include banner.html title='echo-IA' byline='echo-IA Community' %}
-
-      <article id="main">
-        {% include partials/intro_block.html %}
-
-        {# ensure this partial’s top element has id="about" #}
-      </article>
-
-      {% include footer.html %}
-    </div>
-  </body>
-</html>
