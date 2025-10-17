@@ -9,7 +9,8 @@
   </head>
   <body class="{{ page.body_class | default: 'no-sidebar is-preload' }}">
     <div id="page-wrapper">
-      {% include header.html active=page.nav_key | default: 'home' %}
+      {% assign navkey = page.nav_key | default: 'home' %}
+      {% include header.html active=navkey %}
 
       {% if page.show_banner != false %}
         {% include banner.html

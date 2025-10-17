@@ -1,44 +1,59 @@
 ---
-title: "Submit"
-permalink: /submit/
+title: "Catalogs"
+permalink: /catalogs/
 layout: page
-nav_key: submit
+nav_key: catalogs
 
 # Banner (optional overrides)
-banner_title: "Submit to echo-IA"
-banner_byline: "Add your catalog"
-banner_cta: "See guidelines"
-banner_cta_url: "/submit/#how-to-submit"
+banner_title: "Shape Catalogs"
+banner_byline: "echo-IA Community"
+banner_cta: "Submit a catalog"
+banner_cta_url: "/submit/"
+
+# If your scripts loader reads this flag for PapaParse
+papaparse: true
 ---
 
-<header class="special container">
-  <span class="icon regular fa-chevron-up"></span>
-  <h2>Submit a <strong>Shape Catalog</strong></h2>
-  <p>Share a public galaxy shape catalog to add to the echo-IA list.</p>
-</header>
+{% include partials/catalogs_intro.html %}
 
-<section class="wrapper style4 container">
-  <div class="content">
-    <section id="how-to-submit">
-      <a href="#" class="image featured">
-        <img src="{{ '/images/pic04.jpg' | relative_url }}" alt="" />
-      </a>
+<!-- Expandable catalogs list (driven by data_key) -->
+{% include catalogs_list.html data_key='catalogs' %}
 
-      <header><h3>How to submit</h3></header>
-      <p>Open a GitHub issue with this template:</p>
-
-      <ul class="buttons">
-        <li>
-          <a class="button" target="_blank" rel="noopener"
-             href="https://github.com/echo-ia/echoia-hub/issues/new?title=Catalog%20submission:%20&body=**Name**:%0A**Survey**:%0A**Bands**:%0A**Method**:%0A**n_gal**:%0A**z_range**:%0A**PSF corrected**:%0A**DOI/Link**:%0A**License**:%0A**Notes**:">
-            Open Issue
-          </a>
-        </li>
-      </ul>
-
-      <p class="small">
-        Tip: include a DOI (or link), license, and a one-line description of what distinguishes this catalog.
-      </p>
-    </section>
+<!-- Small feature row -->
+<section class="wrapper style1 container special">
+  <div class="row">
+    <div class="col-4 col-12-narrower">
+      <section>
+        <header><h3>Contribute</h3></header>
+        <p>Submit a new catalog with DOI, license, and minimal metadata.</p>
+        <footer>
+          <ul class="buttons">
+            <li><a href="{{ '/submit/' | relative_url }}" class="button small">Submit</a></li>
+          </ul>
+        </footer>
+      </section>
+    </div>
+    <div class="col-4 col-12-narrower">
+      <section>
+        <header><h3>Licensing</h3></header>
+        <p>We list license info; datasets remain © their owners at the original host.</p>
+        <footer>
+          <ul class="buttons">
+            <li><a href="{{ '/catalogs/#license' | relative_url }}" class="button small">Learn More</a></li>
+          </ul>
+        </footer>
+      </section>
+    </div>
+    <div class="col-4 col-12-narrower">
+      <section>
+        <header><h3>Roadmap</h3></header>
+        <p>Toward a unified IA pipeline built on shared, comparable inputs.</p>
+        <footer>
+          <ul class="buttons">
+            <li><a href="https://github.com/echo-IA/echoia-hub/issues" target="_blank" rel="noopener" class="button small">Open Issues</a></li>
+          </ul>
+        </footer>
+      </section>
+    </div>
   </div>
 </section>
