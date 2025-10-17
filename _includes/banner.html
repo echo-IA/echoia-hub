@@ -1,7 +1,36 @@
-{% assign banner_title   = include.title    | default: page.banner_title  | default: page.title | default: site.title | default: "echoIA Hub" %}
-{% assign banner_byline  = include.byline   | default: page.banner_byline | default: site.tagline | default: "Intrinsic Alignments, end-to-end." %}
-{% assign banner_cta     = include.cta      | default: page.banner_cta    | default: "Tell me more" %}
-{% assign banner_cta_url = include.cta_url  | default: page.banner_cta_url | default: "/#about" %}
+{%- comment -%}
+  _includes/banner.html
+
+  Per-page/front-matter overrides:
+    banner_title: "echo-IA"
+    banner_byline: "echo-IA Community"
+    banner_cta: "Tell me more"
+    banner_cta_url: "/about/"
+    # Optional: replace the three dotted lines
+    # banner_lines:
+    #   - "· Your custom line one ·"
+    #   - "· Your custom line two ·"
+    #   - "· Your custom line three ·"
+{%- endcomment -%}
+
+{%- assign banner_title   = include.title
+      | default: page.banner_title
+      | default: page.title
+      | default: site.title
+      | default: "echoIA Hub" -%}
+
+{%- assign banner_byline  = include.byline
+      | default: page.banner_byline
+      | default: site.tagline
+      | default: "Intrinsic Alignments, end-to-end." -%}
+
+{%- assign banner_cta     = include.cta
+      | default: page.banner_cta
+      | default: "Tell me more" -%}
+
+{%- assign banner_cta_url = include.cta_url
+      | default: page.banner_cta_url
+      | default: "/#about" -%}
 
 <section id="banner">
   <div class="inner">
@@ -10,13 +39,22 @@
       <p class="byline">{{ banner_byline }}</p>
     </header>
 
-    <p>&#183; A hub for Intrinsic Alignment research &#183;</p>
-    <p>&#183; Catalogs, datasets, code, and meetings &#183;</p>
-    <p>&#183; Discover, collaborate, and contribute &#183;</p>
+    {%- if page.banner_lines or include.lines -%}
+      {%- assign lines = include.lines | default: page.banner_lines -%}
+      {%- for line in lines -%}
+        <p>{{ line }}</p>
+      {%- endfor -%}
+    {%- else -%}
+      <p>&#183; A hub for Intrinsic Alignment research &#183;</p>
+      <p>&#183; Catalogs, datasets, code, and meetings &#183;</p>
+      <p>&#183; Discover, collaborate, and contribute &#183;</p>
+    {%- endif -%}
 
     <footer>
       <ul class="buttons">
-        <li><a href="{{ banner_cta_url }}" class="button scrolly">{{ banner_cta }}</a></li>
+        <li>
+          <a href="{{ banner_cta_url }}" class="button scrolly">{{ banner_cta }}</a>
+        </li>
       </ul>
     </footer>
   </div>
