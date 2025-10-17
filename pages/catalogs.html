@@ -1,88 +1,59 @@
 ---
 title: "Catalogs"
 permalink: /catalogs/
+layout: page
+nav_key: catalogs
+
+# Banner (optional overrides)
+banner_title: "Shape Catalogs"
+banner_byline: "echo-IA Community"
+banner_cta: "Submit a catalog"
+banner_cta_url: "/submit/"
+
+# If your scripts loader reads this flag for PapaParse
+papaparse: true
 ---
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>{{ page.title }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
-    <!-- Base theme styles + your overrides -->
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
-    <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}" />
+{% include partials/catalogs_intro.html %}
 
-    <noscript><link rel="stylesheet" href="{{ '/assets/css/noscript.css' | relative_url }}" /></noscript>
-  </head>
-  <body class="no-sidebar is-preload">
-    <div id="page-wrapper">
+<!-- Expandable catalogs list (driven by data_key) -->
+{% include catalogs_list.html data_key='catalogs' %}
 
-      {% include header.html active='catalogs' %}
-
-      <!-- Catalogs page banner -->
-      <section id="banner">
-        <div class="inner">
-          <header>
-            <h2>Shape Catalogs</h2>
-            <p class="byline">echo-IA Community</p>
-          </header>
-
-          <p>Curated galaxy shape catalogs with clear links and comparable metadata.</p>
-        </div>
+<!-- Small feature row -->
+<section class="wrapper style1 container special">
+  <div class="row">
+    <div class="col-4 col-12-narrower">
+      <section>
+        <header><h3>Contribute</h3></header>
+        <p>Submit a new catalog with DOI, license, and minimal metadata.</p>
+        <footer>
+          <ul class="buttons">
+            <li><a href="{{ '/submit/' | relative_url }}" class="button small">Submit</a></li>
+          </ul>
+        </footer>
       </section>
-
-      <article id="main">
-        {% include_relative _partials/catalogs_intro.html %}
-
-        <!-- Expandable catalogs list from CSV -->
-        {% comment %} container_id default is "catalogs-list" (matches banner link) {% endcomment %}
-        {% include catalogs_list.html data_key='catalogs' %}
-
-        <!-- Small feature row -->
-        <section class="wrapper style1 container special">
-          <div class="row">
-            <div class="col-4 col-12-narrower">
-              <section>
-                <header><h3>Contribute</h3></header>
-                <p>Submit a new catalog with DOI, license, and minimal metadata.</p>
-                <footer>
-                  <ul class="buttons">
-                    <li><a href="{{ '/submit/' | relative_url }}" class="button small">Submit</a></li>
-                  </ul>
-                </footer>
-              </section>
-            </div>
-            <div class="col-4 col-12-narrower">
-              <section>
-                <header><h3>Licensing</h3></header>
-                <p>We list license info; datasets remain © their owners at the original host.</p>
-                <footer>
-                  <ul class="buttons">
-                    <li><a href="{{ '/catalogs/#license' | relative_url }}" class="button small">Learn More</a></li>
-                  </ul>
-                </footer>
-              </section>
-            </div>
-            <div class="col-4 col-12-narrower">
-              <section>
-                <header><h3>Roadmap</h3></header>
-                <p>Toward a unified IA pipeline built on shared, comparable inputs.</p>
-                <footer>
-                  <ul class="buttons">
-                    <li><a href="https://github.com/echo-ia/echoia-hub/issues" target="_blank" rel="noopener" class="button small">Open Issues</a></li>
-                  </ul>
-                </footer>
-              </section>
-            </div>
-          </div>
-        </section>
-      </article>
-
-      {% include footer.html %}
     </div>
-
-    <!-- Loads jQuery + PapaParse (needed by catalogs_list.html) -->
-    {% include scripts.html papaparse=true %}
-  </body>
-</html>
+    <div class="col-4 col-12-narrower">
+      <section>
+        <header><h3>Licensing</h3></header>
+        <p>We list license info; datasets remain © their owners at the original host.</p>
+        <footer>
+          <ul class="buttons">
+            <li><a href="{{ '/catalogs/#license' | relative_url }}" class="button small">Learn More</a></li>
+          </ul>
+        </footer>
+      </section>
+    </div>
+    <div class="col-4 col-12-narrower">
+      <section>
+        <header><h3>Roadmap</h3></header>
+        <p>Toward a unified IA pipeline built on shared, comparable inputs.</p>
+        <footer>
+          <ul class="buttons">
+            <li><a href="https://github.com/echo-IA/echoia-hub/issues" target="_blank" rel="noopener" class="button small">Open Issues</a></li>
+          </ul>
+        </footer>
+      </section>
+    </div>
+  </div>
+</section>

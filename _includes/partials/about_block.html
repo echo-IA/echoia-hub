@@ -1,0 +1,33 @@
+<section id="about" class="wrapper style4 container">
+  <div class="content">
+    <section>
+      <header><h3>About echoIA</h3></header>
+
+      <p>
+        <strong>echoIA</strong> (Enabling Cosmology with Homogenized Observations of Intrinsic Alignments) is a community effort to
+        build a unified pipeline for <em>intrinsic alignment</em> research. We start by collecting public <strong>galaxy shape catalogs</strong>
+        in one place with clean links and comparable metadata.
+      </p>
+
+      <p>
+        When licensing allows, we will <strong>host or mirror on Zenodo</strong> under an echoIA collection. Each entry tracks provenance,
+        version, license, and citations, and always links to the original source. Otherwise, we point to the official release.
+      </p>
+
+      <ul>
+        <li><strong>Curate:</strong> community-maintained index of public catalogs</li>
+        <li><strong>Host/Mirror:</strong> stable DOIs on Zenodo (where permitted)</li>
+        <li><strong>Standardize:</strong> comparable, high-level fields across releases</li>
+        <li><strong>Credit:</strong> clear licensing & recommended citations</li>
+      </ul>
+
+      <ul class="buttons">
+        <li><a class="button primary" href="{{ '/catalogs/' | relative_url }}">Browse catalogs</a></li>
+        <li><a class="button" href="{{ '/submit/' | relative_url }}">Submit a catalog</a></li>
+        {% if site.zenodo_community_url %}
+          <li><a class="button" href="{{ site.zenodo_community_url }}" target="_blank" rel="noopener">Zenodo collection</a></li>
+        {% endif %}
+      </ul>
+    </section>
+  </div>
+</section>

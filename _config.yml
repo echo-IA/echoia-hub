@@ -1,24 +1,26 @@
+title: "echoIA Community"
+tagline: "Intrinsic Alignments, end-to-end."
+
 owner: "echoIA Community"
 
 site_content_license_name: "CC BY 4.0"
 site_content_license_url: "https://creativecommons.org/licenses/by/4.0/"
-
 metadata_license_name: "CC0 1.0"
 metadata_license_url: "https://creativecommons.org/publicdomain/zero/1.0/"
-
 code_license_name: "MIT"
 code_license_url: "https://opensource.org/license/mit"
 
-zenodo_community_url: "https://zenodo.org/communities/echo-ia"  #
+zenodo_community_url: "https://zenodo.org/communities/echo-ia"
 
-url: "https://echoia.org"   # my user/org site
-baseurl: ""  # important: empty for domain root
+url: "https://echoia.org"
+baseurl: ""
 permalink: pretty
 
 defaults:
   - scope:
-      path: "pages"                # everything in /pages
+      path: "pages"  # all files under /pages
       type: "pages"
     values:
-      permalink: "/:basename/"     # /catalogs/, /submit/, /contact/
-
+      permalink: "/:basename/"  # /catalogs/, /submit/, ...
+      layout: page  # <-- use the shared layout
+      show_banner: true  # <-- include the banner by default
