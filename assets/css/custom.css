@@ -142,8 +142,9 @@ details.catalog .links {
 #banner .inner header,
 #banner .inner header h2 { border-color: rgba(255,255,255,0.6) !important; }
 
-/* If your theme uses an overlay pseudo-element on the banner, ensure it's not fighting you */
-// #banner::before { background: none !important; }
+/* If your theme uses an overlay pseudo-element on the banner, ensure it's not fighting you
+#banner::before { background: none !important; }
+*/
 
 /* ─────────────────────────────
    Brand color overrides (global)
