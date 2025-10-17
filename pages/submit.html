@@ -1,48 +1,35 @@
 ---
 title: "Submit"
 permalink: /submit/
-layout: none
+layout: page
+nav_key: submit
+
+show_banner: true
+banner_title: "Submit your resource"
+banner_byline: "Add shape catalogs, tools, notebooks, or datasets"
+banner_cta: "Contact us"
+banner_cta_url: "/contact/"
 ---
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>{{ page.title }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
-    <noscript><link rel="stylesheet" href="{{ '/assets/css/noscript.css' | relative_url }}" /></noscript>
-  </head>
-  <body class="no-sidebar is-preload">
-    <div id="page-wrapper">
 
+<section class="wrapper style4 container">
+  <div class="content">
+    <section>
+      <header class="special">
+        <span class="icon regular fa-chevron-up"></span>
+        <h2>Submit a <strong>Shape Catalog</strong></h2>
+        <p>Share a public galaxy shape catalog to add to the echo-IA list.</p>
+      </header>
 
-      <article id="main">
-        <header class="special container">
-          <span class="icon regular fa-chevron-up"></span>
-          <h2>Submit a <strong>Shape Catalog</strong></h2>
-          <p>Share a public galaxy shape catalog to add to the echoIA list.</p>
-        </header>
-
-        <section class="wrapper style4 container">
-          <div class="content">
-            <section>
-              <a href="#" class="image featured">
-                <img src="{{ '/images/pic04.jpg' | relative_url }}" alt="" />
-              </a>
-              <header><h3>How to submit</h3></header>
-              <p>Open a GitHub issue with this template:</p>
-              <ul class="buttons">
-                <li><a class="button" target="_blank" rel="noopener"
-                  href="https://github.com/echo-ia/echoia-hub/issues/new?title=Catalog%20submission:%20&body=**Name**:%0A**Survey**:%0A**Bands**:%0A**Method**:%0A**n_gal**:%0A**z_range**:%0A**PSF corrected**:%0A**DOI/Link**:%0A**License**:%0A**Notes**:">Open Issue</a></li>
-              </ul>
-            </section>
-          </div>
-        </section>
-      </article>
-
-    </div>
-
-    {% include scripts.html papaparse=true %}
-
-  </body>
-</html>
+      <header><h3>How to submit</h3></header>
+      <p>Open a GitHub issue with this template:</p>
+      <ul class="buttons">
+        <li>
+          <a class="button" target="_blank" rel="noopener"
+             href="https://github.com/echo-IA/echoia-hub/issues/new?title=Catalog%20submission:%20&body=**Name**:%0A**Survey**:%0A**Bands**:%0A**Method**:%0A**n_gal**:%0A**z_range**:%0A**PSF%20corrected**:%0A**DOI/Link**:%0A**License**:%0A**Notes**:">
+            Open Issue
+          </a>
+        </li>
+      </ul>
+    </section>
+  </div>
+</section>
