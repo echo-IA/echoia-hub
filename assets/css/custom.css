@@ -134,18 +134,39 @@ details.catalog .links {
 
 
 /* ─────────────────────────────
-   4) Navigation weights (bold only on current tab)
+   4) Navigation weights (slim by default, bold only on current)
    ───────────────────────────── */
 
-#header nav ul li a {
-  font-weight: 500 !important;   /* 400 = lighter, 500 = medium */
+/* Make every tab slim (override theme defaults on both <li> and <a>) */
+#header nav ul > li,
+#header nav ul > li > a,
+#header nav ul > li > a:link,
+#header nav ul > li > a:visited {
+  font-weight: 400 !important; /* slim */
 }
-#header nav ul li.current > a,
-#header nav ul li.active  > a,
-#header nav ul li a[aria-current="page"] {
-  font-weight: 700 !important;   /* bold on active tab only */
+
+/* Neutralize any nested <strong> or bold elements inside the link */
+#header nav ul > li > a strong,
+#header nav ul > li > a * {
+  font-weight: inherit !important;
 }
-#header nav ul li a:hover { font-weight: inherit !important; } /* prevent hover reflow */
+
+/* Bold ONLY the active/current tab */
+#header nav ul > li.current,
+#header nav ul > li.active {
+  font-weight: 700 !important;
+}
+#header nav ul > li.current > a,
+#header nav ul > li.active  > a,
+#header nav ul > li > a[aria-current="page"] {
+  font-weight: 700 !important;
+}
+
+/* Don’t change weight on hover/focus (avoid flicker) */
+#header nav ul > li > a:hover,
+#header nav ul > li > a:focus {
+  font-weight: inherit !important;
+}
 
 
 /* ─────────────────────────────
