@@ -1,7 +1,5 @@
 /* =============================
    echo-IA — custom overrides
-   Place at: assets/css/custom.css
-   Make sure it's loaded AFTER main.css
    ============================= */
 
 /* ─────────────────────────────
@@ -21,7 +19,7 @@ details.catalog > summary {
   gap: 0.75rem;
   align-items: center;
   cursor: pointer;
-  list-style: none; /* hide default marker in some browsers */
+  list-style: none;
 }
 
 details.catalog > summary::-webkit-details-marker { display: none; }
@@ -89,23 +87,17 @@ details.catalog .links {
 
 /* ─────────────────────────────
    Banner: keep translucent card + force white text
-   Works with HTML5 UP-style #banner/.inner structure
    ───────────────────────────── */
-
-/* Optional: brand-tinted banner background behind the image */
 #banner { background-color: #322234 !important; }
 
-/* The card behind the banner copy */
 #banner .inner {
   background: rgba(0, 0, 0, 0.35) !important;  /* tweak alpha 0.25–0.50 */
   color: #fff !important;
   border-radius: 1rem;
   padding: 2rem 2.25rem;
-  /* If you want glass effect: uncomment next line */
-  /* backdrop-filter: blur(6px); */
+  /* backdrop-filter: blur(6px); */ /* optional glass effect */
 }
 
-/* Force white for all common text elements inside the banner card */
 #banner .inner h1,
 #banner .inner h2,
 #banner .inner h3,
@@ -119,10 +111,8 @@ details.catalog .links {
   color: #fff !important;
 }
 
-/* Link underline/border visibility on dark */
 #banner .inner a { border-bottom-color: rgba(255,255,255,0.6) !important; }
 
-/* Outline-style buttons inside banner card */
 #banner .inner .button {
   color: #fff !important;
   border-color: rgba(255,255,255,0.6) !important;
@@ -130,7 +120,6 @@ details.catalog .links {
 }
 #banner .inner .button:hover { background: rgba(255,255,255,0.12) !important; }
 
-/* If you use .primary buttons, keep them white in banner context */
 #banner .inner .button.primary {
   background: transparent !important;
   border-color: rgba(255,255,255,0.75) !important;
@@ -138,13 +127,25 @@ details.catalog .links {
 }
 #banner .inner .button.primary:hover { background: rgba(255,255,255,0.18) !important; }
 
-/* Optional: subtle border harmony on banner header */
 #banner .inner header,
 #banner .inner header h2 { border-color: rgba(255,255,255,0.6) !important; }
 
-/* If your theme uses an overlay pseudo-element on the banner, ensure it's not fighting you
-#banner::before { background: none !important; }
-*/
+/* ─────────────────────────────
+   Header: keep solid white everywhere (even on Home)
+   ───────────────────────────── */
+#header {
+  background: #fff !important;
+}
+
+#header.alt {
+  background: #fff !important;
+  position: relative !important;
+  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.06);
+}
+
+#header a { color: inherit !important; }
+#header.alt::before,
+#header.alt::after { content: none !important; background: none !important; }
 
 /* ─────────────────────────────
    Brand color overrides (global)
@@ -155,7 +156,6 @@ a {
 }
 a:hover { background: rgba(50,34,52,0.06); }
 
-/* Primary buttons */
 .button.primary,
 input[type="button"].primary,
 input[type="submit"].primary,
@@ -174,10 +174,8 @@ button.primary:hover {
   border-color: #3f2a56 !important;
 }
 
-/* Default button hover tint */
 .button:hover { background: rgba(50,34,52,0.12) !important; }
 
-/* Inputs (focus ring) */
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus,
@@ -185,13 +183,11 @@ textarea:focus {
   border-color: #322234 !important;
 }
 
-/* Dropdown (nav) hover */
 .dropotron > li:hover > a {
   background: #322234 !important;
   color: #fff !important;
 }
 
-/* Header nav hover (desktop) */
 #header nav ul li.active > a,
 #header nav ul li:hover > a {
   background: rgba(50,34,52,0.12) !important;
