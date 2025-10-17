@@ -3,15 +3,16 @@ title: "Home"
 permalink: /
 layout: page
 nav_key: home
+
+# Banner overrides
 banner_title: "echo-IA"
 banner_byline: "echo-IA Community"
 banner_cta: "Tell me more"
 banner_cta_url: "/about/"
 ---
 
-{% include partials/home_intro.html %}
-{% include partials/about_teaser.html %}
-
+{% include partials/intro_block.html %}
+{% include partials/teaser_block.html %}
 
 <!DOCTYPE HTML>
 <html>
@@ -30,7 +31,7 @@ banner_cta_url: "/about/"
       {% include banner.html title='echo-IA' byline='echo-IA Community' %}
 
       <article id="main">
-        {% include partials/home_intro.html %}
+        {% include partials/intro_block.html %}
 
         {# ensure this partial’s top element has id="about" #}
         {% include partials/about_block.html %}
