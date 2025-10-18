@@ -1,29 +1,26 @@
-# IDE / OS
+# ----------------------------
+# OS / Editors
+# ----------------------------
+.DS_Store
 .idea/
 .ipynb_checkpoints/
-.DS_Store
 
-# Jekyll build + caches
-/_site/
-.sass-cache/
+# ----------------------------
+# Jekyll site + caches
+# ----------------------------
+_site/
 .jekyll-cache/
 .jekyll-metadata
+.sass-cache/
 
-# Bundler / Ruby
-/.bundle/
-**/.bundle/
-
+# ----------------------------
+# Ruby / Bundler
+# (gems installed locally into the repo)
+# ----------------------------
+.bundle/
 vendor/
-# (the line above already covers /vendor/bundle/)
-# keep Gemfile + Gemfile.lock tracked!
 
-# Node
-/node_modules/
-/.bundle/
-/_site/
-/.jekyll-cache/
-/.jekyll-metadata
-/.sass-cache/
-/.bundle/
-vendor/
-/node_modules/
+# ----------------------------
+# Node (if you add any tooling later)
+# ----------------------------
+node_modules/
