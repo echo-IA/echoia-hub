@@ -24,3 +24,4 @@ vendor/
 # Node (if you add any tooling later)
 # ----------------------------
 node_modules/
+*.tgz
