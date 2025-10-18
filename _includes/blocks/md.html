@@ -1,0 +1,6 @@
+<div class="block block-md{% if include.block.align %} align-{{ include.block.align }}{% endif %}">
+  {% if include.block.title %}<h2 class="title">{{ include.block.title }}</h2>{% endif %}
+  <div class="content">
+    {{ include.block.content | markdownify }}
+  </div>
+</div>

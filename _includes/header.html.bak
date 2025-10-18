@@ -1,0 +1,23 @@
+<header id="header">
+  <h1 id="logo">
+    <a href="{{ '/' | relative_url }}">echo-IA</a>
+  </h1>
+
+  <nav id="nav" aria-label="Primary">
+    <ul>
+      {%- assign current = include.active | default: 'home' -%}
+      {%- for item in site.data.navigation -%}
+        {%- assign is_current = (item.key == current) -%}
+        <li class="{% if is_current %}current{% endif %}">
+          <a
+            href="{{ item.url | relative_url }}"
+            {% if item.scrolly %}class="scrolly"{% endif %}
+            {% if is_current %}aria-current="page"{% endif %}
+          >
+            {{ item.title }}
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+REPO="$(cd "$(dirname "$0")/.." && pwd)"
+mkdir -p "$HOME/bin"
+ln -sf "$REPO/launch" "$HOME/bin/launch-echoia"
+if ! grep -qsE "(^|:)\$HOME/bin(:|$)" "$HOME/.zshrc" 2>/dev/null; then
+  printf "\nexport PATH=\"\$HOME/bin:\$PATH\"\n" >> "$HOME/.zshrc"
+  echo "Added ~/bin to PATH in ~/.zshrc. Run: source ~/.zshrc"
+fi
+echo "Installed global command: launch-echoia -> $REPO/launch"

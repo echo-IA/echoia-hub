@@ -1,0 +1,31 @@
+featured:
+  - title: "CCL"
+    subtitle: "Core Cosmology Library"
+    desc: "Standard cosmological calculations including IA-relevant power spectra and tracers."
+    buttons:
+      - label: "GitHub"
+        url: "https://github.com/LSSTDESC/CCL"
+      - label: "Docs"
+        url: "https://ccl.readthedocs.io/"
+      - label: "Tutorials"
+        url: "https://github.com/LSSTDESC/CCLX"
+
+  - title: "Firecrown"
+    subtitle: "DESC likelihood framework"
+    desc: "Composable likelihoods for shear, IA, and joint-probe analyses."
+    buttons:
+      - label: "GitHub"
+        url: "https://github.com/LSSTDESC/firecrown"
+      - label: "Docs"
+        url: "https://firecrown.readthedocs.io/"
+      - label: "Tutorials"
+        url: "https://firecrown.readthedocs.io/en/latest/_static/index.html"
+
+  - title: "NaMaster"
+    subtitle: "Pseudo-Cℓ estimator"
+    desc: "Spin-2 masking and mode-coupling tools for power-spectrum estimation."
+    buttons:
+      - label: "GitHub"
+        url: "https://github.com/LSSTDESC/NaMaster"
+      - label: "Docs"
+        url: "https://namaster.readthedocs.io/"

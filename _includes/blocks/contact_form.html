@@ -1,0 +1,66 @@
+{%- comment -%}
+Usage in page front matter:
+blocks:
+  - type: contact_form
+    email: "echoia@yourdomain.org"   # REQUIRED (mailto target)
+    subject_prefix: "[echo-IA Contact]"  # optional
+    github_issue_url: "https://github.com/echo-IA/echoia-hub/issues/new?title=Contact:%20&body=Your%20message:"  # optional link rendered below the form
+    wrapper_class: "wrapper style4 special container medium"  # optional
+{%- endcomment -%}
+
+{%- assign _email = include.block.email -%}
+{%- if _email -%}
+  {%- assign _subject = include.block.subject_prefix | default: '' -%}
+  {%- assign _wrap = include.block.wrapper_class | default: 'wrapper style4 special container medium' -%}
+
+  <section class="{{ _wrap }}">
+    <div class="content">
+      {% if include.block.title or include.block.byline %}
+        <header class="special">
+          <span class="icon {{ include.block.icon | default: 'regular fa-envelope' }}"></span>
+          <h2>{{ include.block.title | default: 'Get in Touch' }}</h2>
+          {% if include.block.byline %}<p>{{ include.block.byline }}</p>{% endif %}
+        </header>
+      {% endif %}
+
+      <form action="mailto:{{ _email }}" method="post" enctype="text/plain">
+        <div class="row gtr-50">
+          <div class="col-6 col-12-mobile">
+            <label class="visually-hidden" for="cf-name">Name</label>
+            <input id="cf-name" type="text" name="Name" placeholder="Name" />
+          </div>
+          <div class="col-6 col-12-mobile">
+            <label class="visually-hidden" for="cf-email">Email</label>
+            <input id="cf-email" type="email" name="Email" placeholder="Email" />
+          </div>
+          <div class="col-12">
+            <label class="visually-hidden" for="cf-subject">Subject</label>
+            <input id="cf-subject" type="text" name="Subject" placeholder="Subject" value="{{ _subject }}" />
+          </div>
+          <div class="col-12">
+            <label class="visually-hidden" for="cf-message">Message</label>
+            <textarea id="cf-message" name="Message" placeholder="Message" rows="7"></textarea>
+          </div>
+          <div class="col-12">
+            <ul class="buttons">
+              <li><input type="submit" class="special" value="Send Email" /></li>
+              <li><input type="reset" value="Clear" /></li>
+            </ul>
+          </div>
+        </div>
+      </form>
+
+      {% if include.block.github_issue_url %}
+        <hr />
+        <p>
+          Prefer GitHub? Open an issue:
+          <a target="_blank" rel="noopener" href="{{ include.block.github_issue_url }}">
+            echo-IA/echoia-hub issues
+          </a>
+        </p>
+      {% endif %}
+    </div>
+  </section>
+{%- else -%}
+  <div class="notice">contact_form: please set <code>email:</code> in the block.</div>
+{%- endif -%}

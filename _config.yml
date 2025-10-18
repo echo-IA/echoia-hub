@@ -18,9 +18,19 @@ permalink: pretty
 
 defaults:
   - scope:
-      path: "pages"  # all files under /pages
+      path: "pages"
       type: "pages"
     values:
-      permalink: "/:basename/"  # /catalogs/, /submit/, ...
-      layout: page  # <-- use the shared layout
-      show_banner: true  # <-- include the banner by default
+      permalink: "/:basename/"
+      layout: page
+      show_banner: true
+
+plugins:
+  - jekyll-github-metadata
+repository: echo-ia/echoia-hub
+exclude: [vendor]
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false

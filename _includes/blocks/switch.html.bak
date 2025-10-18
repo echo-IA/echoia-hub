@@ -1,0 +1,15 @@
+{% assign b = include.block %}
+{% case b.type %}
+  {% when "md" %}{% include blocks/md.html block=b %}
+  {% when "list" %}{% include blocks/list.html block=b %}
+  {% when "cards" %}{% include blocks/cards.html block=b %}
+  {% when "contact" %}{% include blocks/contact.html block=b %}
+  {% when "teaser" %}{% include blocks/teaser.html block=b %}
+  {% when "buttons" %}{% include blocks/buttons.html block=b %}
+  {% when "events" %}{% include blocks/events.html block=b %}
+  {% when "catalogs_list" %}{% include blocks/catalogs_list.html block=b %}
+  {% when "feature_row" %}{% include blocks/feature_row.html block=b %}
+  {% when "issue_form" %}{% include blocks/issue_form.html block=b %}
+  {% when "features" %}{% include blocks/features.html block=b %}
+  {% else %}<div class="notice">Unknown block: {{ b.type }}</div>
+{% endcase %}

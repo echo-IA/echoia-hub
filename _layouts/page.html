@@ -1,33 +1,28 @@
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>{{ page.title }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
-    <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}" />
-    <noscript><link rel="stylesheet" href="{{ '/assets/css/noscript.css' | relative_url }}" /></noscript>
+---
+layout: base
+---
+<article
+  id="{{ page.article_id | default: 'main' }}"
+  class="{{ page.article_class | default: '' }}"
+  role="main"
+>
+  {% if page.hero %}
+    {% include hero.html
+       icon=page.hero.icon
+       title=page.hero.title
+       tagline=page.hero.byline
+       blurb=page.hero.blurb
+       align=page.hero.align %}
+{% endif %}
 
-  </head>
-  <body class="{{ page.body_class | default: 'no-sidebar is-preload' }}">
-    <div id="page-wrapper">
-      {% assign navkey = page.nav_key | default: 'home' %}
-      {% include header.html active=navkey %}
 
-      {% if page.show_banner != false %}
-        {% include banner.html
-          title=page.banner_title
-          byline=page.banner_byline
-          cta=page.banner_cta
-          cta_url=page.banner_cta_url %}
-      {% endif %}
-
-      <article id="main">
-        {{ content }}
-      </article>
-
-      {% include footer.html %}
-    </div>
-    {% include scripts.html %}
-  </body>
-</html>
+  {% if page.blocks %}
+    <section class="page">
+      {% for b in page.blocks %}
+        {% include blocks/switch.html block=b %}
+      {% endfor %}
+    </section>
+  {% else %}
+    {{ content }}
+  {% endif %}
+</article>

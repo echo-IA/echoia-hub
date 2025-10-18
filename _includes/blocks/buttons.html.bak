@@ -1,0 +1,35 @@
+{%- comment -%}
+Usage in page front matter:
+blocks:
+  - type: buttons
+    align: center  # optional (left|center|right). default: left
+    items:
+      - label: "Browse catalogs"
+        url: "/catalogs/"
+        style: primary  # optional (primary|default)
+      - label: "Explore tools"
+        url: "/tools/"
+      - label: "Contribute"
+        url: "/submit/"
+      - label: "Meetings"
+        url: "/meetings/"
+    show_zenodo: true  # optional; if true and site.zenodo_community_url exists, shows Zenodo button
+{%- endcomment -%}
+
+{%- assign align = include.block.align | default: 'left' -%}
+<ul class="buttons buttons--{{ align }}">
+  {%- for it in include.block.items -%}
+    <li>
+      <a class="button{% if it.style == 'primary' %} primary{% endif %}"
+         href="{{ it.url | relative_url }}">{{ it.label }}</a>
+    </li>
+  {%- endfor -%}
+
+  {%- if include.block.show_zenodo and site.zenodo_community_url -%}
+    <li>
+      <a class="button" href="{{ site.zenodo_community_url }}" target="_blank" rel="noopener">
+        Zenodo collection
+      </a>
+    </li>
+  {%- endif -%}
+</ul>

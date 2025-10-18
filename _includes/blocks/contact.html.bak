@@ -1,0 +1,6 @@
+<div class="block block-contact">
+  {% if include.block.title %}<h2>{{ include.block.title }}</h2>{% endif %}
+  <p>Email: <a href="mailto:{{ include.block.email }}">{{ include.block.email }}</a></p>
+  {% if include.block.slack %}<p>Slack: <a href="{{ include.block.slack }}">{{ include.block.slack }}</a></p>{% endif %}
+  {% if include.block.address %}<p>{{ include.block.address }}</p>{% endif %}
+</div>

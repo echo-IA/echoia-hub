@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+RUBY_VER="3.2.4"
+if command -v rbenv >/dev/null 2>&1; then
+  export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
+  eval "$(rbenv init - bash 2>/dev/null || rbenv init - zsh 2>/dev/null || true)"
+  rbenv versions --bare | grep -qx "$RUBY_VER" || rbenv install "$RUBY_VER"
+  rbenv local "$RUBY_VER"; rbenv shell "$RUBY_VER"; rbenv rehash
+fi
+gem install bundler -v 2.7.2 --no-document || true
+hash -r
+bundle config set --local path vendor/bundle
+bundle lock --add-platform ruby
+bundle _2.7.2_ install
+bundle _2.7.2_ binstubs bundler jekyll

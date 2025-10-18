@@ -232,3 +232,154 @@ textarea:focus {
   padding-left: 0;
 }
 .align-center .buttons li { list-style: none; }
+
+
+/* ─────────────────────────────
+   7) Centered, readable content column (site-wide)
+   ───────────────────────────── */
+
+/* Tweak these if you want different width/padding */
+:root {
+  --content-max: 72ch;  /* good reading width */
+  --content-pad: 1rem;  /* side breathing room */
+}
+
+/* Keep hero/banner truly full-bleed */
+#banner,
+#banner .inner {
+  max-width: none !important;
+  margin-inline: 0 !important;
+}
+
+/* Hard-center anything inside the main content area.
+   These selectors cover typical HTML5 UP/Jekyll wrappers and your block system. */
+#main,
+#main > .inner,
+main,
+main > .inner,
+.page,
+.page > .inner,
+.page-content,
+.post,
+.post > .inner,
+.wrapper,
+.container,
+.blocks,
+.blocks > .block,
+.blocks > .block > .content {
+  max-width: var(--content-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: var(--content-pad) !important;
+  padding-right: var(--content-pad) !important;
+  text-align: left !important; /* keep text left-aligned within centered column */
+}
+
+/* Prevent images/tables from overflowing the new width */
+.page-content img,
+.blocks img,
+.page-content table,
+.blocks table {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Optional: slightly wider on very large screens */
+@media (min-width: 1400px) {
+  :root { --content-max: 78ch; }
+}
+
+/* ─────────────────────────────
+   8) Center ONLY the titles under the banner (works for hero & block titles too)
+   ───────────────────────────── */
+
+/* Page/post headers just under the banner */
+#main > .inner > header,
+.page > .inner > header,
+.post > .inner > header {
+/* center the container */
+  text-align: center !important;
+}
+
+/* Center the heading text inside any of those headers */
+#main > .inner > header h1,
+#main > .inner > header h2,
+.page > .inner > header h1,
+.page > .inner > header h2,
+.post > .inner > header h1,
+.post > .inner > header h2 {
+  text-align: inherit !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Hero block used on pages like Submit/Tools */
+.hero,
+.hero h1,
+.hero h2,
+.hero .title,
+.hero .byline {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Block titles from your YAML blocks system */
+.blocks > .block > header,
+.blocks > .block > header h2,
+.blocks > .block > .title,
+.blocks > .block > .title h2 {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* ─────────────────────────────
+   Alignment utilities (titles only)
+   ───────────────────────────── */
+
+/* Apply to section wrappers like .hero or .block when you pass align: ... */
+.align-left  > header,
+.align-left  > header * ,
+.align-left  .title,
+.align-left  .byline { text-align: left !important; }
+
+.align-center > header,
+.align-center > header * ,
+.align-center .title,
+.align-center .byline { text-align: center !important; }
+
+.align-right > header,
+.align-right > header * ,
+.align-right .title,
+.align-right .byline { text-align: right !important; }
+
+/* Keep markdown body/content left-aligned even when the block is centered */
+.align-center > .content,
+.align-right  > .content { text-align: left !important; }
+
+
+/* ─────────────────────────────
+   Alignment utilities (hero + block titles only)
+   ───────────────────────────── */
+
+/* HERO include: <header class="special container ..."> */
+.special.container.align-center { text-align: center !important; }
+.special.container.align-right  { text-align: right  !important; }
+
+/* MD block include alignment (only titles center/right) */
+.block.align-center > h2.title,
+.block.align-center > header,
+.block.align-center > header *,
+.block.align-center .title,
+.block.align-center .byline { text-align: center !important; }
+
+.block.align-right  > h2.title,
+.block.align-right  > header,
+.block.align-right  > header *,
+.block.align-right  .title,
+.block.align-right  .byline { text-align: right !important; }
+
+/* keep body text left-aligned */
+.block.align-center > .content,
+.block.align-right  > .content { text-align: left !important; }
