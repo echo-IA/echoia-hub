@@ -1,12 +1,34 @@
+{% comment %} HERO include — safe CTA {% endcomment %}
 <header class="special container{% if include.align %} align-{{ include.align }}{% endif %}">
-  <span class="icon {{ include.icon | default: 'fa-regular fa-chart-bar' }}" aria-hidden="true"></span>
-  {% if include.title or include.heading %}
-    <h2>{{ include.title | default: include.heading | default: "The echoIA Hub" }}</h2>
-  {% endif %}
-  {% if include.tagline %}
-    <p class="byline">{{ include.tagline }}</p>
-  {% endif %}
-  {% if include.blurb %}
-    <p>{{ include.blurb }}</p>
+  {% if include.icon %}<span class="icon {{ include.icon }}" aria-hidden="true"></span>{% endif %}
+  {% if include.title %}<h2>{{ include.title }}</h2>{% endif %}
+  {% if include.byline %}<p class="byline">{{ include.byline }}</p>{% endif %}
+
+  {% if include.cta_label and include.cta_href %}
+    {% assign raw   = include.cta_href | default: '' %}
+    {% assign first = raw | slice: 0, 1 %}
+    {% assign lower = raw | downcase %}
+
+    {%- comment -%} Keep hashes literal; only relativize real paths {%- endcomment -%}
+    {% assign href = raw %}
+    {% unless first == '#' or lower contains '://' or (lower | slice:0,2) == '//' %}
+      {% assign href = raw | relative_url %}
+    {% endunless %}
+
+    {%- comment -%} External only for http(s) or protocol-relative {%- endcomment -%}
+    {% assign is_external = false %}
+    {% if lower contains '://' or (lower | slice:0,2) == '//' %}
+      {% assign is_external = true %}
+    {% endif %}
+
+    <ul class="buttons buttons--{{ include.align | default: 'center' }}">
+      <li>
+        <a class="button primary btn--lg"
+           href="{{ href }}"
+           {% if is_external %}target="_blank" rel="noopener"{% else %}target="_self"{% endif %}>
+          {{ include.cta_label }}
+        </a>
+      </li>
+    </ul>
   {% endif %}
 </header>

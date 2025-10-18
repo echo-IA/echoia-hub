@@ -4,14 +4,14 @@ permalink: /meetings/
 layout: page
 nav_key: meetings
 
-# Banner (kept from your original)
+# Banner
 show_banner: true
 banner_title: "Meetings & Workshops"
 banner_byline: "How we meet + past events"
-banner_cta: "Upcoming items"
+banner_cta: "Upcoming"
 banner_cta_url: "/meetings/#upcoming"
 
-# Page hero (replaces the old inline header block)
+# Page hero
 hero:
   icon: "fa-regular fa-calendar-days"
   title: "echo-IA Meetings & Workshops"
@@ -30,22 +30,22 @@ blocks:
       _Joining details TBA—Mattermost and videoconference links will be posted here once set up._
 
   - type: events
-    title: "Upcoming/Current"
+    title: "Upcoming"
     align: center
     anchor_id: "upcoming"
     items:
       - year: 2025
-        title: "CAROLINA Workshop"
-        when: "September 15–19, 2025"
-        where: "Duke University, Durham, NC"
-        what: "echo-IA working sessions on IA measurements, modeling, and pipelines."
+        title: "echo-IA Community Check-in (Online)"
+        when: "TENTATIVE: Wednesday, November 12, 2025 · TIME TBA"
+        where: "Zoom (online)"
+        what: "Short round-table updates → focused discussion → next steps. All welcome."
         buttons:
-          - label: "Workshop page"
-            url: "https://echo-ia.github.io/CAROLINA/"
-          - label: "Schedule"
-            url: "https://echo-ia.github.io/CAROLINA/schedule/"
-          - label: "Participants"
-            url: "https://echo-ia.github.io/CAROLINA/participants/"
+          - label: "Join on Zoom"
+            url: "https://zoom.us/j/XXXXXXXXXX?pwd=YYYYYYYYYY"
+            size: sm
+          - label: "Agenda / Notes"
+            url: "https://docs.google.com/document/d/XXXXXXXXXXXXX/edit"
+            size: sm
 
   - type: md
     title: "Previous echo-IA workshops"
@@ -53,6 +53,19 @@ blocks:
 
   - type: events
     items:
+      - year: 2025
+        title: "CAROLINA — Connecting Analyses and Research On Lensing and INtrinsic Alignments"
+        when: "September 15–19, 2025"
+        where: "Duke University, Durham, NC"
+        what: "echo-IA working sessions on IA measurements, modeling, and pipelines."
+        buttons:
+          - label: "Workshop page"
+            url: "https://echo-ia.github.io/CAROLINA/"
+            size: sm
+          - label: "Schedule"
+            url: "https://echo-ia.github.io/CAROLINA/schedule/"
+            size: sm
+
       - year: 2024
         title: "LILAC — Linking Intrinsic Alignments Across Collaborations"
         when: "May 6–10, 2024"
@@ -61,10 +74,10 @@ blocks:
         buttons:
           - label: "Website"
             url: "https://echo-ia.github.io/LILAC/"
+            size: sm
           - label: "Schedule"
             url: "https://echo-ia.github.io/LILAC/schedule.html"
-          - label: "Participants"
-            url: "https://echo-ia.github.io/LILAC/participants.html"
+            size: sm
 
       - year: 2023
         title: "hol-IA — a holistic approach to galaxy intrinsic alignments"
@@ -74,6 +87,7 @@ blocks:
         buttons:
           - label: "Website"
             url: "https://www.lorentzcenter.nl/hol-ia-a-holistic-approach-to-galaxy-intrinsic-alignments.html"
+            size: sm
 
       - year: 2022
         title: "echo-IA Kickoff Workshop"
@@ -83,8 +97,9 @@ blocks:
         buttons:
           - label: "Website"
             url: "https://echo-ia.github.io/FebKickoff/"
+            size: sm
           - label: "Schedule"
             url: "https://echo-ia.github.io/FebKickoff/schedule.html"
-          - label: "Participants"
-            url: "https://echo-ia.github.io/FebKickoff/participants.html"
+            size: sm
+            
 ---

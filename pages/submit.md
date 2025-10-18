@@ -14,6 +14,7 @@ hero:
   icon: "fa-regular fa-square-plus"
   title: "Submit a Resource"
   byline: "Open a pre-filled GitHub issue. We’ll review and add it."
+  align: center
 
 blocks:
   # Catalog submission form

@@ -1,2 +1,0 @@
-{%- assign key = include.block.data_key | default: 'catalogs' -%}
-{% include catalogs_list.html data_key=key %}

@@ -17,11 +17,11 @@ layout: base
 
 
   {% if page.blocks %}
-    <section class="page">
-      {% for b in page.blocks %}
-        {% include blocks/switch.html block=b %}
-      {% endfor %}
-    </section>
+    <section class="page blocks">
+     {% for b in page.blocks %}
+       {% include blocks/switch.html block=b %}
+     {% endfor %}
+   </section>
   {% else %}
     {{ content }}
   {% endif %}

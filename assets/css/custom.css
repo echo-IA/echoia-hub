@@ -1,7 +1,6 @@
 /* =============================
    echo-IA — custom overrides
-   Place at: assets/css/custom.css
-   (Loaded after main.css)
+   MUST be placed at: assets/css/custom.css (loaded after main.css)
    ============================= */
 
 
@@ -89,11 +88,10 @@ details.catalog .links {
    3) Banner: translucent card + white text
    ───────────────────────────── */
 
-/* Optional solid brand tint behind the banner image (adjust/remove as you like) */
 #banner { background-color: #322234 !important; }
 
 #banner .inner {
-  background: rgba(0, 0, 0, 0.35);   /* tweak alpha 0.25–0.50 */
+  background: rgba(0, 0, 0, 0.35); /* tweak alpha 0.25–0.50 */
   color: #fff;
   border-radius: 1rem;
   padding: 2rem 2.25rem;
@@ -109,9 +107,7 @@ details.catalog .links {
 #banner .inner strong,
 #banner .inner em,
 #banner .inner li,
-#banner .inner span {
-  color: #fff !important;
-}
+#banner .inner span { color: #fff !important; }
 
 #banner .inner a { border-bottom-color: rgba(255,255,255,0.6) !important; }
 
@@ -137,36 +133,22 @@ details.catalog .links {
    4) Navigation weights (slim by default, bold only on current)
    ───────────────────────────── */
 
-/* Make every tab slim (override theme defaults on both <li> and <a>) */
 #header nav ul > li,
 #header nav ul > li > a,
 #header nav ul > li > a:link,
-#header nav ul > li > a:visited {
-  font-weight: 400 !important; /* slim */
-}
+#header nav ul > li > a:visited { font-weight: 400 !important; }
 
-/* Neutralize any nested <strong> or bold elements inside the link */
 #header nav ul > li > a strong,
-#header nav ul > li > a * {
-  font-weight: inherit !important;
-}
+#header nav ul > li > a * { font-weight: inherit !important; }
 
-/* Bold ONLY the active/current tab */
 #header nav ul > li.current,
-#header nav ul > li.active {
-  font-weight: 700 !important;
-}
+#header nav ul > li.active { font-weight: 700 !important; }
 #header nav ul > li.current > a,
 #header nav ul > li.active  > a,
-#header nav ul > li > a[aria-current="page"] {
-  font-weight: 700 !important;
-}
+#header nav ul > li > a[aria-current="page"] { font-weight: 700 !important; }
 
-/* Don’t change weight on hover/focus (avoid flicker) */
 #header nav ul > li > a:hover,
-#header nav ul > li > a:focus {
-  font-weight: inherit !important;
-}
+#header nav ul > li > a:focus { font-weight: inherit !important; }
 
 
 /* ─────────────────────────────
@@ -202,9 +184,7 @@ button.primary:hover {
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus,
-textarea:focus {
-  border-color: #322234 !important;
-}
+textarea:focus { border-color: #322234 !important; }
 
 .dropotron > li:hover > a {
   background: #322234 !important;
@@ -212,9 +192,7 @@ textarea:focus {
 }
 
 #header nav ul li.active > a,
-#header nav ul li:hover > a {
-  background: rgba(50,34,52,0.12) !important;
-}
+#header nav ul li:hover > a { background: rgba(50,34,52,0.12) !important; }
 
 
 /* ─────────────────────────────
@@ -225,34 +203,22 @@ textarea:focus {
 .button.fit { width: auto; }
 
 .align-center { text-align: center; }
-.align-center .buttons {
-  display: flex;
-  justify-content: center;
-  gap: 0.75rem;
-  padding-left: 0;
-}
-.align-center .buttons li { list-style: none; }
-
 
 /* ─────────────────────────────
    7) Centered, readable content column (site-wide)
    ───────────────────────────── */
 
-/* Tweak these if you want different width/padding */
 :root {
   --content-max: 72ch;  /* good reading width */
   --content-pad: 1rem;  /* side breathing room */
 }
 
-/* Keep hero/banner truly full-bleed */
 #banner,
 #banner .inner {
   max-width: none !important;
   margin-inline: 0 !important;
 }
 
-/* Hard-center anything inside the main content area.
-   These selectors cover typical HTML5 UP/Jekyll wrappers and your block system. */
 #main,
 #main > .inner,
 main,
@@ -272,10 +238,9 @@ main > .inner,
   margin-right: auto !important;
   padding-left: var(--content-pad) !important;
   padding-right: var(--content-pad) !important;
-  text-align: left !important; /* keep text left-aligned within centered column */
+  text-align: left !important; /* keep body text left-aligned */
 }
 
-/* Prevent images/tables from overflowing the new width */
 .page-content img,
 .blocks img,
 .page-content table,
@@ -284,24 +249,53 @@ main > .inner,
   height: auto !important;
 }
 
-/* Optional: slightly wider on very large screens */
+/* space between top-level blocks on a page */
+.page.blocks {
+  display: grid;
+  row-gap: 1.25rem; /* tweak 1.25–2.5rem to taste */
+}
+
+/* ───────── Events block spacing ───────── */
+
+/* Space BELOW the "Upcoming"/section header and ABOVE the first event */
+.feature-list > header {
+  margin-bottom: 0.75rem;  /* increase to add more gap after the header */
+}
+
+/* Each event item (the <section> inside .feature-list) */
+.feature-list > section {
+  /* Vertical padding INSIDE each event (top & bottom) */
+  padding: 1.75rem 0;
+
+  /* Divider ABOVE each event (except the first) */
+  border-top: 1px solid rgba(0,0,0,0.12);
+}
+.feature-list > section:first-of-type { border-top: 0; }
+
+/* Tighter typography inside each event */
+.feature-list h4 { margin: 0 0 0.35rem; }   /* trim big default heading margins */
+.feature-list p  { margin: 0 0 0.25rem; }   /* small gap between text lines */
+.feature-list p:last-child { margin-bottom: 0; }  /* avoid extra gap before buttons */
+
+/* Space BETWEEN an event’s description and its button row */
+.feature-list ul.buttons {
+  margin-top: 0.10rem !important;  /* this is the knob you tweak */
+}
+
+
 @media (min-width: 1400px) {
   :root { --content-max: 78ch; }
 }
 
+
 /* ─────────────────────────────
-   8) Center ONLY the titles under the banner (works for hero & block titles too)
+   8) Center ONLY the titles under the banner
    ───────────────────────────── */
 
-/* Page/post headers just under the banner */
 #main > .inner > header,
 .page > .inner > header,
-.post > .inner > header {
-/* center the container */
-  text-align: center !important;
-}
+.post > .inner > header { text-align: center !important; }
 
-/* Center the heading text inside any of those headers */
 #main > .inner > header h1,
 #main > .inner > header h2,
 .page > .inner > header h1,
@@ -313,7 +307,6 @@ main > .inner,
   margin-right: auto !important;
 }
 
-/* Hero block used on pages like Submit/Tools */
 .hero,
 .hero h1,
 .hero h2,
@@ -324,7 +317,6 @@ main > .inner,
   margin-right: auto !important;
 }
 
-/* Block titles from your YAML blocks system */
 .blocks > .block > header,
 .blocks > .block > header h2,
 .blocks > .block > .title,
@@ -334,11 +326,11 @@ main > .inner,
   margin-right: auto !important;
 }
 
+
 /* ─────────────────────────────
-   Alignment utilities (titles only)
+   9) Alignment utilities (titles only)
    ───────────────────────────── */
 
-/* Apply to section wrappers like .hero or .block when you pass align: ... */
 .align-left  > header,
 .align-left  > header * ,
 .align-left  .title,
@@ -351,23 +343,17 @@ main > .inner,
 
 .align-right > header,
 .align-right > header * ,
-.align-right .title,
-.align-right .byline { text-align: right !important; }
+.align-right  .title,
+.align-right  .byline { text-align: right !important; }
 
-/* Keep markdown body/content left-aligned even when the block is centered */
 .align-center > .content,
 .align-right  > .content { text-align: left !important; }
 
-
-/* ─────────────────────────────
-   Alignment utilities (hero + block titles only)
-   ───────────────────────────── */
-
-/* HERO include: <header class="special container ..."> */
+/* HERO include shortcuts */
 .special.container.align-center { text-align: center !important; }
 .special.container.align-right  { text-align: right  !important; }
 
-/* MD block include alignment (only titles center/right) */
+/* MD block include alignment */
 .block.align-center > h2.title,
 .block.align-center > header,
 .block.align-center > header *,
@@ -380,6 +366,125 @@ main > .inner,
 .block.align-right  .title,
 .block.align-right  .byline { text-align: right !important; }
 
-/* keep body text left-aligned */
 .block.align-center > .content,
 .block.align-right  > .content { text-align: left !important; }
+
+
+/* ─────────────────────────────
+   10) Buttons block alignment + sizes
+   ───────────────────────────── */
+
+/* layout + alignment */
+ul.buttons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex !important;   /* win over theme */
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+ul.buttons li { margin: 0; }
+
+ul.buttons.buttons--left   { justify-content: flex-start !important; }
+ul.buttons.buttons--center { justify-content: center !important; }
+ul.buttons.buttons--right  { justify-content: flex-end !important; }
+
+/* Button size utilities: sm | md | lg (force override theme) */
+.button.btn--sm {
+  font-size: 0.85rem !important;
+  line-height: 1.2 !important;
+  padding: 0.35rem 0.6rem !important;
+  border-radius: 0 !important;
+}
+.button.btn--md {
+  font-size: 1rem !important;
+  line-height: 1.25 !important;
+  padding: 0.5rem 0.9rem !important;
+  border-radius: 0 !important;
+}
+.button.btn--lg {
+  font-size: 1.1rem !important;
+  line-height: 1.25 !important;
+  padding: 0.7rem 1.1rem !important;
+  border-radius: 0 !important;
+}
+
+/* keep banner CTA buttons centered regardless of block alignment */
+#banner .inner ul.buttons,
+#banner .inner .actions {
+  display: flex;
+  justify-content: center !important;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* (Optional) respect reduced motion for the caret in <details> */
+@media (prefers-reduced-motion: reduce) {
+  details.catalog > summary::after { transition: none; }
+}
+
+/* ---- FLAT BUTTONS: remove bevel/gradients/shadows ---- */
+.button,
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  -webkit-appearance: none;          /* kill iOS bevels */
+  appearance: none;
+  background-image: none !important; /* kill gradients */
+  box-shadow: none !important;       /* kill outer/inset shadows */
+  text-shadow: none !important;
+  border-style: solid !important;    /* ensure uniform border (no “raised” top/bottom) */
+  border-width: 1px !important;
+}
+
+/* keep your default (non-primary) buttons flat + subtle */
+.button:not(.primary),
+button:not(.primary) {
+  background: transparent !important;
+  border-color: rgba(0,0,0,0.25) !important;   /* adjust for dark/light theme */
+}
+
+/* your primary color (already defined above), but make it flat */
+.button.primary,
+button.primary,
+input.primary[type="button"],
+input.primary[type="submit"] {
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  border-color: #322234 !important;           /* same all sides = no bevel */
+}
+
+/* hover/focus: still flat */
+.button:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+.button:focus,
+button:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus {
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* active: avoid “pressed” inset look */
+.button:active,
+button:active,
+input[type="button"]:active,
+input[type="submit"]:active {
+  box-shadow: none !important;
+  transform: translateY(0); /* optional: remove press-down motion if theme has it */
+}
+
+/* optional: unify corner radius so it doesn’t read as beveled */
+.button,
+button,
+input[type="button"],
+input[type="submit"] {
+  border-radius: 0 !important; /* tweak to taste */
+}

@@ -19,6 +19,7 @@ hero:
   icon: "fa-regular fa-table"
   title: "Browse <strong>shape catalogs</strong>"
   blurb: "Find public galaxy shape catalogs with consistent high-level metadata, licensing notes, and links to their original hosts."
+  align: center
 
 blocks:
   # Data-driven expandable list (reuses your existing catalogs_list.html)

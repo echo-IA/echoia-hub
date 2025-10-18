@@ -4,6 +4,8 @@ blocks:
   - type: events
     title: "Upcoming/Current"
     anchor_id: "upcoming"
+    align: center            # optional: left | center | right (default: left)
+    button_size: md          # optional block-wide default: sm | md | lg (default: page.button_size | md)
     items:
       - year: 2025
         title: "CAROLINA Workshop"
@@ -13,35 +15,45 @@ blocks:
         buttons:
           - label: "Workshop page"
             url: "https://echo-ia.github.io/CAROLINA/"
+            size: sm            # optional per-button override
           - label: "Schedule"
             url: "https://echo-ia.github.io/CAROLINA/schedule/"
+            style: primary      # optional (primary | default)
           - label: "Participants"
             url: "https://echo-ia.github.io/CAROLINA/participants/"
 {%- endcomment -%}
 
-{%- assign id = include.block.anchor_id -%}
-<section{% if id %} id="{{ id }}"{% endif %} class="feature-list">
-  {%- if include.block.title -%}
-    <header><h3>{{ include.block.title }}</h3></header>
+{%- assign block = include.block -%}
+{%- assign id = block.anchor_id -%}
+{%- assign align = block.align | default: 'left' -%}
+{%- assign block_size = block.button_size | default: page.button_size | default: 'md' -%}
+
+<section{% if id %} id="{{ id }}"{% endif %} class="feature-list align-{{ align }}">
+  {%- if block.title -%}
+    <header><h3>{{ block.title }}</h3></header>
   {%- endif -%}
 
-  {%- for ev in include.block.items -%}
-    <section>
+  {%- for ev in block.items -%}
+    <section class="event">
       <h4>
         {%- if ev.year -%}{{ ev.year }} · {% endif -%}
         <strong>{{ ev.title }}</strong>
       </h4>
+
       <p>
-        {%- if ev.when -%}<strong>When:</strong> {{ ev.when }}<br>{%- endif -%}
+        {%- if ev.when  -%}<strong>When:</strong> {{ ev.when  }}<br>{%- endif -%}
         {%- if ev.where -%}<strong>Where:</strong> {{ ev.where }}<br>{%- endif -%}
-        {%- if ev.what -%}<strong>What:</strong> {{ ev.what }}{%- endif -%}
+        {%- if ev.what  -%}<strong>What:</strong>  {{ ev.what  }}{%- endif -%}
       </p>
 
-      {%- if ev.buttons -%}
-        <ul class="buttons">
+      {%- if ev.buttons and ev.buttons.size > 0 -%}
+        <ul class="buttons buttons--{{ align }}">
           {%- for b in ev.buttons -%}
+            {%- assign btn_size = b.size | default: block_size -%}
             <li>
-              <a class="button" href="{{ b.url }}"{% if b.url contains '://' %} target="_blank" rel="noopener"{% endif %}>
+              <a class="button btn--{{ btn_size }}{% if b.style == 'primary' %} primary{% endif %}"
+                 href="{{ b.url | relative_url }}"
+                 {% if b.newtab or b.url contains '://' %}target="_blank" rel="noopener"{% endif %}>
                 {{ b.label }}
               </a>
             </li>

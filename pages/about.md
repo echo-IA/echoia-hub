@@ -15,6 +15,7 @@ banner_cta_url: "#about-top"   # this button lands on first content block
 blocks:
   - type: md
     title: "About echo-IA"
+    align: center
     content: |
       <a id="about-top"></a>
       **echo-IA** (Enabling Cosmology with Homogenized Observations of Intrinsic Alignments) is a community space
@@ -34,7 +35,7 @@ blocks:
       _Jump to_ → [Collaboration & Organization](#details)
 
   - type: buttons
-    align: left
+    align: center
     items:
       - label: "Browse catalogs"
         url: "/catalogs/"
@@ -49,6 +50,7 @@ blocks:
 
   - type: md
     title: "Collaboration and Organization"
+    align: center
     content: |
       <a id="details"></a>
       echo-IA is a collaboration across multiple cosmology communities, including LSST DESC,

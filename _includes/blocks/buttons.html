@@ -1,35 +1,54 @@
-{%- comment -%}
-Usage in page front matter:
-blocks:
-  - type: buttons
-    align: center  # optional (left|center|right). default: left
-    items:
-      - label: "Browse catalogs"
-        url: "/catalogs/"
-        style: primary  # optional (primary|default)
-      - label: "Explore tools"
-        url: "/tools/"
-      - label: "Contribute"
-        url: "/submit/"
-      - label: "Meetings"
-        url: "/meetings/"
-    show_zenodo: true  # optional; if true and site.zenodo_community_url exists, shows Zenodo button
-{%- endcomment -%}
+{%- assign block  = include.block -%}
+{%- assign align  = block.align | default: include.align | default: 'center' -%}
+{%- assign block_size = block.button_size
+                      | default: include.button_size
+                      | default: page.button_size
+                      | default: site.button_size_default
+                      | default: 'md' -%}
 
-{%- assign align = include.block.align | default: 'left' -%}
-<ul class="buttons buttons--{{ align }}">
-  {%- for it in include.block.items -%}
-    <li>
-      <a class="button{% if it.style == 'primary' %} primary{% endif %}"
-         href="{{ it.url | relative_url }}">{{ it.label }}</a>
-    </li>
-  {%- endfor -%}
+<section class="block block--buttons align-{{ align }}"
+         {%- if block.anchor_id %} id="{{ block.anchor_id }}"{% endif -%}>
+  <ul class="buttons buttons--{{ align }}">
+    {%- for it in block.items -%}
+      {%- assign item_size = it.size | default: block_size -%}
 
-  {%- if include.block.show_zenodo and site.zenodo_community_url -%}
-    <li>
-      <a class="button" href="{{ site.zenodo_community_url }}" target="_blank" rel="noopener">
-        Zenodo collection
-      </a>
-    </li>
-  {%- endif -%}
-</ul>
+      {%- comment -%} Build href safely {%- endcomment -%}
+      {%- assign raw = it.url | default: '' -%}
+      {%- assign first_char = raw | slice: 0, 1 -%}
+      {%- assign href = raw -%}
+      {%- if raw and first_char != '#' -%}
+        {%- assign href = raw | relative_url -%}
+      {%- endif -%}
+
+      {%- comment -%} Decide if link is external (new tab) {%- endcomment -%}
+      {%- assign open_new = '' -%}
+      {%- assign lower = raw | downcase -%}
+      {%- assign is_proto_rel = lower | slice: 0, 2 -%}
+      {%- assign is_http  = lower | slice: 0, 7 -%}
+      {%- assign is_https = lower | slice: 0, 8 -%}
+      {%- if it.newtab
+            or is_proto_rel == '//'
+            or is_http  == 'http://'
+            or is_https == 'https://' -%}
+        {%- assign open_new = ' target="_blank" rel="noopener"' -%}
+      {%- endif -%}
+
+      <li>
+        <a class="button btn--{{ item_size }}{% if it.style == 'primary' %} primary{% endif %}"
+           href="{{ href }}"{{ open_new }}>{{ it.label }}</a>
+      </li>
+    {%- endfor -%}
+
+    {%- if block.show_zenodo and site.zenodo_community_url -%}
+      {%- assign z = site.zenodo_community_url -%}
+      {%- assign zlower = z | downcase -%}
+      {%- assign zenodo_open = '' -%}
+      {%- if zlower contains '://' or (zlower | slice:0,2) == '//' -%}
+        {%- assign zenodo_open = ' target="_blank" rel="noopener"' -%}
+      {%- endif -%}
+      <li>
+        <a class="button btn--{{ block_size }}" href="{{ z }}"{{ zenodo_open }}>Zenodo collection</a>
+      </li>
+    {%- endif -%}
+  </ul>
+</section>

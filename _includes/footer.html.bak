@@ -1,7 +1,0 @@
-<footer id="footer">
-  <ul class="icons">
-    <!-- Add real URLs when ready -->
-    <li><a href="#" class="icon brands circle fa-github" rel="noopener"><span class="label">Github</span></a></li>
-  </ul>
-  {% include copyright.html owner="echoIA Community" %}
-</footer>

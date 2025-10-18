@@ -14,17 +14,20 @@ hero:
   icon: "fa-solid fa-wrench"
   title: "echo-IA <strong>Tools</strong>"
   byline: "Software, scripts, and utilities supporting intrinsic alignment research."
+  align: center
 
 blocks:
   # Overview
   - type: md
     title: "What you’ll find"
+    align: center
     content: |
       - **Core packages:** libraries for IA modeling, cosmology, and analysis.
       - **Workflows:** pipelines and reproducible analysis setups.
       - **Utilities:** plotting, diagnostics, and data preparation scripts.
 
       _Want to share your code? Use [Submit](/submit/) or [Contact](/contact/)._
+      
 
   # Guides (unlisted)
   - type: buttons

@@ -14,6 +14,7 @@ hero:
   icon: "fa-regular fa-envelope"
   title: "Get in Touch"
   byline: "Open a GitHub issue and we’ll follow up."
+  align: center
 
 blocks:
   - type: issue_form
