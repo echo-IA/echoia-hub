@@ -32,48 +32,69 @@ Defaults to "/#about" if nothing provided.
   | default: page.banner_cta_url
   | default: "/#about" -%}
 
-<section id="banner">
-  <div class="inner">
-    <header>
-      <h2>{{ banner_title }}</h2>
-      <p class="byline">{{ banner_byline }}</p>
-    </header>
-
-    {%- assign lines = include.lines | default: page.banner_lines -%}
-    {%- if lines -%}
-      {%- for line in lines -%}
-        <p>{{ line }}</p>
-      {%- endfor -%}
-    {%- else -%}
-      <p>&#183; A hub for Intrinsic Alignment research &#183;</p>
-      <p>&#183; Catalogs, datasets, code, and meetings &#183;</p>
-      <p>&#183; Discover, collaborate, and contribute &#183;</p>
+<section id="banner" role="region" aria-labelledby="banner-heading">
+  <div class="inner banner--grid">
+    {%- if page.banner_logo -%}
+      <div class="banner__logo-wrap">
+        <img class="banner__logo"
+             src="{{ page.banner_logo | relative_url }}"
+             alt="{{ page.banner_logo_alt | default: 'Site logo' }}"
+             width="220"
+             height="auto"
+             loading="eager"
+             decoding="async">
+      </div>
     {%- endif -%}
 
-    {%- comment -%} Figure out the final href + attributes {%- endcomment -%}
-    {%- assign raw_href = banner_cta_url | default: "/#about" -%}
-    {%- assign first_char = raw_href | slice: 0, 1 -%}
-    {%- assign is_external = raw_href contains "://" -%}
+    <div class="banner__content">
+      <header>
+        <h2 id="banner-heading">{{ banner_title }}</h2>
+        <p class="byline">{{ banner_byline }}</p>
+      </header>
 
-    {%- if is_external -%}
-      {%- assign final_href = raw_href -%}
-      {%- assign extra_attrs = ' target="__blank" rel="noopener"' -%}
-    {%- elsif first_char == "#" -%}
-      {%- assign final_href = raw_href -%}{%- comment -%} same-page anchor; no relative_url {%- endcomment -%}
-      {%- assign extra_attrs = '' -%}
-    {%- else -%}
-      {%- assign final_href = raw_href | relative_url -%}
-      {%- assign extra_attrs = '' -%}
-    {%- endif -%}
+      {%- assign lines = include.lines | default: page.banner_lines -%}
+      {%- if lines -%}
+        {%- for line in lines -%}
+          <p>{{ line }}</p>
+        {%- endfor -%}
+      {%- else -%}
+        <p>&#183; A hub for Intrinsic Alignment research &#183;</p>
+        <p>&#183; Catalogs, datasets, code, and meetings &#183;</p>
+        <p>&#183; Discover, collaborate, and contribute &#183;</p>
+      {%- endif -%}
 
-    <footer>
-      <ul class="buttons">
-        <li>
-          <a href="{{ final_href }}" class="button scrolly"{{ extra_attrs }}>
-            {{ banner_cta }}
-          </a>
-        </li>
-      </ul>
-    </footer>
+      {%- comment -%} Figure out the final href + attributes {%- endcomment -%}
+      {%- assign raw_href = banner_cta_url | default: "/#about" -%}
+      {%- assign first_char = raw_href | slice: 0, 1 -%}
+      {%- assign is_external = raw_href contains "://" -%}
+
+      {%- if is_external -%}
+        {%- assign final_href = raw_href -%}
+        {%- assign extra_attrs = ' target="_blank" rel="noopener"' -%}
+      {%- elsif first_char == "#" -%}
+        {%- assign final_href = raw_href -%} {# same-page anchor; no relative_url #}
+        {%- assign extra_attrs = '' -%}
+      {%- else -%}
+        {%- assign final_href = raw_href | relative_url -%}
+        {%- assign extra_attrs = '' -%}
+      {%- endif -%}
+
+      {%- comment -%} Only use .scrolly for same-page anchors {%- endcomment -%}
+      {%- if first_char == "#" -%}
+        {%- assign btn_class = "button scrolly" -%}
+      {%- else -%}
+        {%- assign btn_class = "button" -%}
+      {%- endif -%}
+
+      <footer>
+        <ul class="buttons">
+          <li>
+            <a href="{{ final_href }}" class="{{ btn_class }}"{{ extra_attrs }}>
+              {{ banner_cta }}
+            </a>
+          </li>
+        </ul>
+      </footer>
+    </div>
   </div>
 </section>

@@ -8,6 +8,8 @@ nav_key: home
 show_banner: true
 banner_title: "echo-IA"
 banner_byline: "COLLABORATION"
+banner_logo: /images/logos/echoia_logo_white_notext_transparent.svg
+banner_logo_alt: "echo-IA logo"
 banner_cta: "Tell me more"
 banner_cta_url: "#about"
 

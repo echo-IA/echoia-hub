@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# --- resolve repo root even if called via ~/bin/launch symlink ---
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ "$SOURCE" != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+REPO_ROOT="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+cd "$REPO_ROOT"
+# ----------------------------------------------------------------
+
+# --- init rbenv (so we use .ruby-version Ruby, not system 2.6) ---
+if command -v rbenv >/dev/null 2>&1; then
+  if [[ -n "${ZSH_VERSION:-}" ]]; then
+    eval "$(rbenv init - zsh)"
+  else
+    eval "$(rbenv init - bash)"
+  fi
+fi
+
+# bootstrap if needed
+if [ ! -x "./bin/jekyll" ] || [ ! -d "vendor/bundle" ]; then
+  echo "==> Bootstrapping (./bin/setup)…"
+  ./bin/setup
+fi
+
+# prefer repo-local bundler shim; fall back to global bundle
+BVER="$(awk '/^BUNDLED WITH/{getline; gsub(/^[ \t]+/,""); print; exit}' Gemfile.lock 2>/dev/null || echo "2.7.2")"
+BUNDLE_CMD="./bin/bundle"; [ -x "$BUNDLE_CMD" ] || BUNDLE_CMD="bundle"
+
+echo "==> Starting Jekyll (livereload) at http://localhost:4000"
+exec "$BUNDLE_CMD" _${BVER}_ exec ./bin/jekyll serve --livereload

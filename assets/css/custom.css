@@ -128,6 +128,60 @@ details.catalog .links {
 #banner .inner header,
 #banner .inner header h2 { border-color: rgba(255,255,255,0.6) !important; }
 
+/* ─────────────────────────────
+   3a) Banner logo layout (opt-in classes)
+   Add the classes in your banner include to activate:
+     <div class="inner banner--grid">
+       <div class="banner__logo-wrap"><img class="banner__logo" ... /></div>
+       <div class="banner__content">...</div>
+     </div>
+   ───────────────────────────── */
+
+#banner .banner--grid {
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Side-by-side when there’s room; stacks on narrow screens */
+@media (min-width: 760px) {
+  #banner .banner--grid { grid-template-columns: auto 1fr; column-gap: 1.25rem; }
+}
+
+/* Logo sizing & polish */
+#banner .banner__logo-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#banner .banner__logo {
+  display: block;
+  max-width: 240px;    /* hard cap; tweak if needed */
+  width: 100%;
+  height: auto;
+  opacity: 0.98;
+}
+
+/* Text column tweaks so it breathes next to the logo */
+#banner .banner__content header h2 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+#banner .banner__content .byline {
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.06em;
+}
+
+/* Slightly reduce title on very small screens to avoid cramming */
+@media (max-width: 420px) {
+  #banner .banner__content header h2 {
+    font-size: 1.8rem;
+    line-height: 1.15;
+  }
+}
+
+
 
 /* ─────────────────────────────
    4) Navigation weights (slim by default, bold only on current)
