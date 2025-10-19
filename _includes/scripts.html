@@ -1,4 +1,3 @@
-<!-- _includes/scripts.html -->
 <script src="{{ '/assets/js/jquery.min.js' | relative_url }}"></script>
 
 {% if include.dropotron %}
@@ -11,6 +10,12 @@
 <script src="{{ '/assets/js/breakpoints.min.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/util.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+
+{% comment %} Add MathJax here {% endcomment %}
+{% if page.mathjax %}
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{% endif %}
 
 {% if include.papaparse %}
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>

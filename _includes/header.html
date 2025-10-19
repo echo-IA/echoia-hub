@@ -1,6 +1,13 @@
 <header id="header">
   <h1 id="logo">
-    <a href="{{ '/' | relative_url }}">echo-IA</a>
+    <a href="{{ '/' | relative_url }}" class="brand" aria-label="{{ site.title | default: 'echo-IA' }}">
+      <img
+        class="brand__mark"
+        src="{{ site.site_logo | default: '/assets/images/logos/echoia_logo_black_notext_transparent.png' | relative_url }}"
+        alt=""
+        width="32" height="36" loading="eager" decoding="async">
+      <span class="brand__text">{{ site.title | default: 'echo-IA' }}</span>
+    </a>
   </h1>
 
   <nav id="nav" aria-label="Primary">
@@ -12,8 +19,7 @@
           <a
             href="{{ item.url | relative_url }}"
             {% if item.scrolly %}class="scrolly"{% endif %}
-            {% if is_current %}aria-current="page"{% endif %}
-          >
+            {% if is_current %}aria-current="page"{% endif %}>
             {{ item.title }}
           </a>
         </li>

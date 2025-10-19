@@ -40,8 +40,8 @@ ARROW_LW = 2.5
 # Text (subtitle optional; defaults to title-only)
 TITLE = "echoIA"  # main title text
 SUBTITLE = ""  # set to a non-empty string to show subtitle
-TITLE_FS = 80 # large title
-TITLE_WEIGHT = 100 # ultra-light (100..900 or names: ultralight, light, etc.)
+TITLE_FS = 80  # large title
+TITLE_WEIGHT = 100  # ultralight-ish; accepts 100..900 or 'light','bold',...
 SUB_FS = 20
 ITAL_SUB = True
 
@@ -52,7 +52,7 @@ def rot2d(theta_deg: float) -> np.ndarray:
     return np.array([[c, -s], [s, c]])
 
 def normalized_spiral(theta, b=B_SHAPE):
-    u = (1.0 + theta/THETA_MAX)
+    u = (1.0 + theta / THETA_MAX)
     r = (u**b - 1.0) / ((1.0 + 1.0)**b - 1.0)
     return np.clip(r, 0.0, 1.0)
 
@@ -69,12 +69,24 @@ def draw_logo(
     dpi: int = 300,
     figsize=(8, 6),
     fontface: str = FONTFACE,
+    bg_variant: str = "transparent",  # 'transparent' | 'opaque'
+    opaque_bg_color: str | None = None,  # only used when bg_variant == 'opaque'
 ):
+    """Render and save one logo variant.
+
+    bg_variant: 'transparent' or 'opaque'
+    opaque_bg_color: e.g. '#000000' or '#FFFFFF' if you want a solid background.
+    """
     colors = COLOR_SCHEMES[color_mode]
     PRIMARY = colors["PRIMARY"]
 
     os.makedirs(output_dir, exist_ok=True)
+
+    # Prepare figure with optional solid background
     fig = plt.figure(figsize=figsize)
+    if bg_variant == "opaque":
+        # set facecolor globally so bbox includes it
+        fig.patch.set_facecolor(opaque_bg_color or "#000000")
 
     # --- Text layout prep (figure band & lines) ---
     sub_lines = [line for line in SUBTITLE.split("\n") if line.strip()]
@@ -95,6 +107,10 @@ def draw_logo(
     ax = fig.add_axes(axes_rect)
     ax.set_aspect('equal')
     ax.axis('off')
+
+    # If opaque and background color set, paint axes so export matches figure face
+    if bg_variant == "opaque" and opaque_bg_color:
+        ax.set_facecolor(opaque_bg_color)
 
     # Ellipse radii
     a = ELLIPSE_WIDTH / 2.0
@@ -141,7 +157,6 @@ def draw_logo(
 
     # --- Text ---
     if show_text:
-        # Use ultra-light title weight; fallbacks handled by renderer if unavailable
         title_fp = FontProperties(family=fontface, weight=TITLE_WEIGHT)
         band_bottom = axes_rect[1] + axes_rect[3]
         band_top    = 0.995
@@ -150,7 +165,6 @@ def draw_logo(
         title_h = (TITLE_FS / 72.0) / fig_h_in
 
         if n_lines == 0:
-            # No subtitle: sit closer to logo
             title_y = band_top - 0.25 * title_h
             fig.text(0.5, title_y, TITLE, fontproperties=title_fp,
                      ha='center', va='top', fontsize=TITLE_FS, color=PRIMARY)
@@ -181,31 +195,51 @@ def draw_logo(
 
     # Save
     suffix = "text" if show_text else "notext"
-    stem = f"{base_name}_{color_mode}_{suffix}"
+    stem = f"{base_name}_{color_mode}_{suffix}_{bg_variant}"
     for ext in formats:
         out_path = os.path.join(output_dir, f"{stem}.{ext}")
-        if ext.lower() in ("png", "svg"):
-            fig.savefig(out_path, dpi=dpi, bbox_inches='tight', transparent=True)
+        ext_lower = ext.lower()
+        if ext_lower in ("png", "svg"):
+            fig.savefig(out_path, dpi=dpi, bbox_inches='tight',
+                        transparent=(bg_variant == "transparent"))
         else:
+            # jpg/jpeg can't be transparent
             fig.savefig(out_path, dpi=dpi, bbox_inches='tight', transparent=False)
     plt.close(fig)
 
 def parse_args():
     p = argparse.ArgumentParser(description="Generate logo variants.")
-    p.add_argument("--output-dir", default="images", help="Where to save images (default: repo-root/images)")
+    p.add_argument("--output-dir", default="images/logos", help="Where to save images (default: repo-root/images)")
     p.add_argument("--base-name", default="echoia_logo", help="Base file name without extension")
     p.add_argument("--dpi", type=int, default=300, help="Image DPI")
     p.add_argument("--figsize", type=float, nargs=2, default=(8, 6), metavar=("W", "H"),
                    help="Figure size inches W H")
     p.add_argument("--modes", nargs="+", default=["white", "black"], choices=list(COLOR_SCHEMES.keys()),
                    help="Color modes to generate")
-    p.add_argument("--formats", nargs="+", default=["png", "jpg", "svg"], choices=["png", "jpg", "svg", "jpeg"],
+    p.add_argument("--formats", nargs="+", default=["png", "jpg", "svg"],
+                   choices=["png", "jpg", "svg", "jpeg"],
                    help="File formats to export")
     p.add_argument("--title-weight", default=None,
                    help="Override title weight (e.g., 100..900 or 'ultralight','light','normal','bold')")
+
+    # Background variants
+    p.add_argument("--include-transparent", dest="include_transparent", action="store_true",
+                   help="Also export transparent background variants")
+    p.add_argument("--include-opaque", dest="include_opaque", action="store_true",
+                   help="Also export opaque (solid) background variants")
+    p.add_argument("--opaque-bg-color", default=None,  # was "#000000"
+                   help="Solid background color for opaque variants (hex). If omitted, auto-contrast is used.")
+
+    # Text variants
     group = p.add_mutually_exclusive_group()
-    group.add_argument("--with-text", dest="with_text", action="store_true", help="Generate ONLY text variants")
-    group.add_argument("--no-text", dest="no_text", action="store_true", help="Generate ONLY no-text variants")
+    group.add_argument("--with-text", dest="with_text", action="store_true",
+                       help="Generate ONLY text variants")
+    group.add_argument("--no-text", dest="no_text", action="store_true",
+                       help="Generate ONLY no-text variants")
+
+    # Sensible defaults: make both transparent and opaque
+    p.set_defaults(include_transparent=True, include_opaque=True)
+
     return p.parse_args()
 
 def main():
@@ -234,19 +268,32 @@ def main():
         if fmt not in formats:
             formats.append(fmt)
 
+    # Background variants to render
+    bg_variants = []
+    if args.include_transparent:
+        bg_variants.append(("transparent", None))
+    if args.include_opaque:
+        bg_variants.append(("opaque", args.opaque_bg_color))
+
     for mode in args.modes:
         for show_text in text_variants:
-            draw_logo(
-                output_dir=args.output_dir,
-                base_name=args.base_name,
-                color_mode=mode,
-                show_text=show_text,
-                formats=formats,
-                dpi=args.dpi,
-                figsize=tuple(args.figsize),
-            )
-            variant = "text" if show_text else "notext"
-            print(f"Saved {mode} {variant} to {os.path.abspath(args.output_dir)} as {', '.join(formats)}")
+            for bg_name, bg_color in bg_variants:
+                draw_logo(
+                    output_dir=args.output_dir,
+                    base_name=args.base_name,
+                    color_mode=mode,
+                    show_text=show_text,
+                    formats=formats,
+                    dpi=args.dpi,
+                    figsize=tuple(args.figsize),
+                    bg_variant=bg_name,
+                    opaque_bg_color=bg_color,
+                )
+                variant = "text" if show_text else "notext"
+                print(
+                    f"Saved {mode} {variant} {bg_name} "
+                    f"to {os.path.abspath(args.output_dir)} as {', '.join(formats)}"
+                )
 
 if __name__ == "__main__":
     main()

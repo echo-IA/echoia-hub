@@ -1,0 +1,139 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$REPO_ROOT"
+
+REQUIRED_RUBY="$(cat .ruby-version 2>/dev/null || echo "3.2.4")"
+REQUIRED_BUNDLER="$(awk '/^BUNDLED WITH/{getline; gsub(/^[ \t]+/,""); print; exit}' Gemfile.lock 2>/dev/null || echo "2.7.2")"
+
+echo "==> echoia-hub bootstrap"
+echo "    Ruby:    ${REQUIRED_RUBY}"
+echo "    Bundler: ${REQUIRED_BUNDLER}"
+
+# --- Ensure Homebrew+rbenv available (macOS) ---
+if ! command -v rbenv >/dev/null 2>&1; then
+  if command -v brew >/dev/null 2>&1; then
+    echo "==> Installing rbenv and ruby-build via Homebrew..."
+    brew install rbenv ruby-build
+  else
+    echo "ERROR: Homebrew not found. Install it from https://brew.sh first."
+    exit 1
+  fi
+fi
+
+# --- Init rbenv in this shell (no need to edit rc files here) ---
+if [[ -n "${ZSH_VERSION:-}" ]]; then
+  eval "$(rbenv init - zsh)"
+else
+  eval "$(rbenv init - bash)"
+fi
+
+# --- Install/select the project Ruby ---
+if ! rbenv versions --bare | grep -qx "${REQUIRED_RUBY}"; then
+  echo "==> Installing Ruby ${REQUIRED_RUBY} (first time only)…"
+  rbenv install "${REQUIRED_RUBY}"
+fi
+echo "==> Selecting Ruby ${REQUIRED_RUBY} locally"
+rbenv local "${REQUIRED_RUBY}"
+
+# --- Install the required Bundler for THIS Ruby ---
+if ! gem list -i bundler -v "${REQUIRED_BUNDLER}" >/dev/null 2>&1; then
+  echo "==> Installing Bundler ${REQUIRED_BUNDLER}…"
+  gem install bundler -v "${REQUIRED_BUNDLER}" --no-document
+  rbenv rehash || true
+fi
+
+# --- Bundle install into vendor/bundle (repo-local) ---
+echo "==> bundle install (to vendor/bundle)…"
+bundle _${REQUIRED_BUNDLER}_ config set path 'vendor/bundle'
+bundle _${REQUIRED_BUNDLER}_ install
+
+# --- Binstubs and robust launcher that resolves symlinks ---
+echo "==> Writing robust launch script…"
+cat > "${REPO_ROOT}/launch" <<'SH'
+#!/usr/bin/env bash
+set -euo pipefail
+# Resolve symlinks to find the repo root even if invoked as ~/bin/launch
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ "$SOURCE" != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+REPO_ROOT="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+cd "$REPO_ROOT"
+
+# Init rbenv in non-interactive shells (so ruby/bundle match .ruby-version)
+if command -v rbenv >/dev/null 2>&1; then
+  if [[ -n "${ZSH_VERSION:-}" ]]; then
+    eval "$(rbenv init - zsh)"
+  else
+    eval "$(rbenv init - bash)"
+  fi
+fi
+
+# Bootstrap if needed
+if [ ! -x "./bin/jekyll" ] || [ ! -d "vendor/bundle" ]; then
+  echo "==> Bootstrapping (./bin/setup)…"
+  ./bin/setup || true
+fi
+
+# Use Bundler version from Gemfile.lock (fallback 2.7.2)
+BUNDLER_WANTED="$(awk '/^BUNDLED WITH/{getline; gsub(/^[ \t]+/,""); print; exit}' Gemfile.lock 2>/dev/null || echo "2.7.2")"
+
+echo "==> Starting Jekyll (livereload) at http://localhost:4000"
+exec bundle _${BUNDLER_WANTED}_ exec jekyll serve --livereload
+SH
+chmod +x "${REPO_ROOT}/launch"
+
+# --- Repo-local setup script (idempotent) ---
+mkdir -p "${REPO_ROOT}/bin"
+cat > "${REPO_ROOT}/bin/setup" <<'SH'
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+RUBY_REQ="$(cat .ruby-version 2>/dev/null || echo "3.2.4")"
+BUNDLER_REQ="$(awk '/^BUNDLED WITH/{getline; gsub(/^[ \t]+/,""); print; exit}' Gemfile.lock 2>/dev/null || echo "2.7.2")"
+
+# init rbenv for this shell
+if command -v rbenv >/dev/null 2>&1; then
+  if [[ -n "${ZSH_VERSION:-}" ]]; then
+    eval "$(rbenv init - zsh)"
+  else
+    eval "$(rbenv init - bash)"
+  fi
+  rbenv local "$RUBY_REQ" || true
+fi
+
+gem list -i bundler -v "$BUNDLER_REQ" >/dev/null 2>&1 || gem install bundler -v "$BUNDLER_REQ" --no-document
+bundle _${BUNDLER_REQ}_ config set path 'vendor/bundle'
+bundle _${BUNDLER_REQ}_ install
+bundle _${BUNDLER_REQ}_ binstubs jekyll
+echo "Setup done."
+SH
+chmod +x "${REPO_ROOT}/bin/setup"
+
+# --- Install a global 'launch' that points to repo script and kill old alias ---
+mkdir -p "${HOME}/bin"
+ln -sf "${REPO_ROOT}/launch" "${HOME}/bin/launch"
+ln -sf "${REPO_ROOT}/launch" "${HOME}/bin/launch-echoia"
+chmod +x "${HOME}/bin/launch" "${HOME}/bin/launch-echoia"
+
+# Put ~/bin first on PATH (once)
+if ! echo "$PATH" | awk -v RS=':' 'NR==1 && $0==ENVIRON["HOME"]"/bin"{ok=1} END{exit !ok}'; then
+  echo 'export PATH="$HOME/bin:$PATH"' >> "${HOME}/.zshrc"
+fi
+
+# Remove any lingering alias named launch (now and persistently)
+unalias launch 2>/dev/null || true
+for f in "${HOME}/.zshrc" "${HOME}/.zprofile" "${HOME}/.zshenv" "${HOME}/.zlogin" "${HOME}/.zlogout"; do
+  [ -f "$f" ] && /usr/bin/sed -i '' '/^[[:space:]]*alias[[:space:]]\+launch=/d' "$f"
+done
+echo 'unalias launch 2>/dev/null || true' >> "${HOME}/.zshrc"
+
+echo "==> Bootstrap complete."
+echo "   • Global command: launch   (and launch-echoia)"
+echo "   • If PATH changed, run:    source ~/.zshrc"

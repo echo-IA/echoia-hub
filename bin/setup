@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+RUBY_REQ="$(cat .ruby-version 2>/dev/null || echo "3.2.4")"
+BUNDLER_REQ="$(awk '/^BUNDLED WITH/{getline; gsub(/^[ \t]+/,""); print; exit}' Gemfile.lock 2>/dev/null || echo "2.7.2")"
+
+# init rbenv for this shell
+if command -v rbenv >/dev/null 2>&1; then
+  if [[ -n "${ZSH_VERSION:-}" ]]; then
+    eval "$(rbenv init - zsh)"
+  else
+    eval "$(rbenv init - bash)"
+  fi
+  rbenv local "$RUBY_REQ" || true
+fi
+
+gem list -i bundler -v "$BUNDLER_REQ" >/dev/null 2>&1 || gem install bundler -v "$BUNDLER_REQ" --no-document
+bundle _${BUNDLER_REQ}_ config set path 'vendor/bundle'
+bundle _${BUNDLER_REQ}_ install
+bundle _${BUNDLER_REQ}_ binstubs jekyll
+echo "Setup done."

@@ -1,14 +1,25 @@
-title: "echoIA Community"
+title: "echo-IA"
 tagline: "Intrinsic Alignments, end-to-end."
 
-owner: "echoIA Community"
+owner: "echoIA Collaboration"
 
 site_content_license_name: "CC BY 4.0"
 site_content_license_url: "https://creativecommons.org/licenses/by/4.0/"
+site_logo: "/images/logos/echoia_logo_black_notext_transparent.png"
 metadata_license_name: "CC0 1.0"
 metadata_license_url: "https://creativecommons.org/publicdomain/zero/1.0/"
 code_license_name: "MIT"
 code_license_url: "https://opensource.org/license/mit"
+
+image_credit_md: >
+  Background image: [NASA](https://www.nasa.gov/),
+  [ESA](https://www.esa.int/),
+  and the HUDF Team.
+
+author_credit_html: 'Site by <a href="https://nikosarcevic.com" rel="noopener">Niko Šarčević</a>'
+
+
+
 
 zenodo_community_url: "https://zenodo.org/communities/echo-ia"
 
@@ -18,9 +29,19 @@ permalink: pretty
 
 defaults:
   - scope:
-      path: "pages"  # all files under /pages
+      path: "pages"
       type: "pages"
     values:
-      permalink: "/:basename/"  # /catalogs/, /submit/, ...
-      layout: page  # <-- use the shared layout
-      show_banner: true  # <-- include the banner by default
+      permalink: "/:basename/"
+      layout: page
+      show_banner: true
+
+plugins:
+  - jekyll-github-metadata
+repository: echo-ia/echoia-hub
+exclude: [vendor]
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false

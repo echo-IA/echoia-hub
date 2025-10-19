@@ -1,0 +1,48 @@
+defaults:
+  repo: "echo-IA/echoia-hub"
+  wrapper_class: "wrapper style4 container"
+  open_in_new_tab: true
+
+presets:
+  submit_catalog:
+    label: "submission"
+    extra_labels: ["catalog"]
+    title_prefix: "Catalog submission: "
+    heading: "Submit a Shape Catalog"
+    byline: "Share DOI, license, survey, method, and brief notes."
+    icon: "fa-regular fa-chevron-up"
+    body_template: |
+      **Name**:
+      **Survey**:
+      **Bands**:
+      **Method**:
+      **n_gal**:
+      **z_range**:
+      **PSF corrected**:
+      **DOI/Link**:
+      **License**:
+      **Notes**:
+
+  submit_tool:
+    label: "submission"
+    extra_labels: ["tool"]
+    title_prefix: "Tool submission: "
+    heading: "Submit a Tool / Library"
+    byline: "Share repo link, license, language, and short description."
+    icon: "brands fa-github"
+
+  submit_dataset:
+    label: "submission"
+    extra_labels: ["dataset"]
+    title_prefix: "Dataset submission: "
+    heading: "Submit a Dataset"
+    byline: "Share DOI/link, license, modality, and curation notes."
+    icon: "regular fa-database"
+
+  contact:
+    label: "contact"
+    extra_labels: ["website"]
+    title_prefix: "[Contact] "
+    heading: "Get in Touch"
+    byline: "Questions, corrections, collaborations."
+    icon: "regular fa-envelope"

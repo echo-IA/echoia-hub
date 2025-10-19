@@ -1,10 +1,10 @@
 {%- comment -%}
 Usage:
-  {% include copyright_block.html
-      owner="echo-IA Community"
+  {% include copyright.html
+      owner="echo-IA Collaboration"
       start_year="2025"
-      site_license_name="CC BY 4.0"
-      site_license_url="https://creativecommons.org/licenses/by/4.0/"
+      site_content_license_name="CC BY 4.0"
+      site_content_license_url="https://creativecommons.org/licenses/by/4.0/"
       metadata_license_name="CC0 1.0"
       metadata_license_url="https://creativecommons.org/publicdomain/zero/1.0/"
   %}
@@ -18,17 +18,32 @@ Or rely on _config.yml keys with same names.
   <li>&copy; {{ now_year }} {{ owner }}</li>
   <li>
     Site content licensed
-    <a href="{{ site.site_content_license_url | default: 'https://creativecommons.org/licenses/by/4.0/' }}"
+    <a href="{{ include.site_content_license_url | default: site.site_content_license_url | default: 'https://creativecommons.org/licenses/by/4.0/' }}"
        target="_blank" rel="noopener">
-      {{ site.site_content_license_name | default: 'CC BY 4.0' }}
+      {{ include.site_content_license_name | default: site.site_content_license_name | default: 'CC BY 4.0' }}
     </a>.
   </li>
   <li>
     Catalog metadata
-    <a href="{{ site.metadata_license_url | default: 'https://creativecommons.org/publicdomain/zero/1.0/' }}"
+    <a href="{{ include.metadata_license_url | default: site.metadata_license_url | default: 'https://creativecommons.org/publicdomain/zero/1.0/' }}"
        target="_blank" rel="noopener">
-      {{ site.metadata_license_name | default: 'CC0 1.0' }}
+      {{ include.metadata_license_name | default: site.metadata_license_name | default: 'CC0 1.0' }}
     </a>; linked datasets © their owners.
   </li>
-  <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+  <li>
+      Design adapted from
+      <a href="https://html5up.net/twenty" target="_blank" rel="noopener">“Twenty” by HTML5 UP</a>
+      — <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="license noopener">CC BY 3.0</a>.
+    </li>
+
+    {%- assign author_credit = include.author_credit_html | default: site.author_credit_html -%}
+    {%- if author_credit -%}
+      <li class="self-credit">{{ author_credit }}</li>
+    {%- endif -%}
+
+    {%- assign credit_md = include.image_credit_md | default: page.image_credit_md | default: site.image_credit_md -%}
+    {%- if credit_md -%}
+      <li class="image-credit">{{ credit_md | markdownify }}</li>
+    {%- endif -%}
+
 </ul>
