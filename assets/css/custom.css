@@ -667,18 +667,69 @@ input[type="submit"] {
 
 
 /* ─────────────────────────────
-   11) Footer: centered layout + logo
+   11) Footer: centered layout + logo (3×2 grid items)
    ───────────────────────────── */
-/* FOOTER layout & logo — centered stack */
+
+/* Footer container: logo on top, items below */
 #footer {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 0.5rem !important;
+  gap: 0.75rem !important;
   text-align: center !important;
   padding-top: 1rem;
 }
+
+/* Logo */
+#footer .footer-brand img {
+  display: block;
+  height: 50px;    /* tweak to taste */
+  width: auto;
+  opacity: .95;
+  transition: opacity .2s ease;
+}
+#footer .footer-brand a:hover img,
+#footer .footer-brand a:focus img { opacity: 1; }
+
+/* Items as a 3×2 grid (auto wraps to 2 cols, then 1) */
+/* Footer grid: 3 equal columns, neat rows */
+#footer .copyright {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important; /* equal widths */
+  column-gap: 1rem !important;
+  row-gap: 0.25rem !important;
+  justify-items: center !important;
+  align-items: start !important;
+  text-align: center !important;
+}
+
+/* this is the copyright list items */
+#footer .copyright li {
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+#footer .copyright li::before,
+#footer .copyright li + li::before {
+  content: none !important;
+}
+
+
+
+/* Make the long HUDF line wrap nicely without stretching the row */
+#footer .image-credit {
+  opacity: 0.85;
+  max-width: 32rem;              /* keeps the column from getting too wide */
+  margin-inline: auto;
+}
+#footer .image-credit a { opacity: 1; }
+#footer .image-credit a:hover,
+#footer .image-credit a:focus { text-decoration: underline; }
+
+/* Optional: slightly tighter link underline style across footer */
+#footer .copyright a { text-underline-offset: 2px; }
+
 
 /* Hubble UDF credit: links readable */
 #footer .image-credit { opacity: 0.85; }
@@ -686,27 +737,13 @@ input[type="submit"] {
 #footer .image-credit a:hover,
 #footer .image-credit a:focus { text-decoration: underline; }
 
-/* Footer logo */
-#footer .footer-brand img {
-  display: block;
-  height: 44px;              /* ↑ was 28px — tweak to taste */
-  width: auto;
-  filter: opacity(.95);      /* remove grayscale unless you want it */
-  transition: opacity .2s ease;
+/* Responsive: 2 columns on tablets, 1 column on phones */
+@media (max-width: 720px) {
+  #footer .copyright { grid-template-columns: repeat(2, auto); }
 }
-#footer .footer-brand a:hover img,
-#footer .footer-brand a:focus img { opacity: 1; }
-
-/* Center the copyright list nicely */
-#footer .copyright {
-  list-style: none;
-  margin: 0.25rem 0 0;
-  padding: 0;
-}
-#footer .copyright li {
-  display: inline;
-}
-#footer .copyright li + li::before {
-  content: " · ";
-  opacity: 0.6;
+@media (max-width: 420px) {
+  #footer .copyright { grid-template-columns: 1fr; }
+  #footer .copyright li { justify-self: center; }
+  /* let the long HUDF credit span full width on phones if needed */
+  #footer .image-credit { grid-column: 1 / -1; }
 }

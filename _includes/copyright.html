@@ -35,6 +35,12 @@ Or rely on _config.yml keys with same names.
       <a href="https://html5up.net/twenty" target="_blank" rel="noopener">“Twenty” by HTML5 UP</a>
       — <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="license noopener">CC BY 3.0</a>.
     </li>
+
+    {%- assign author_credit = include.author_credit_html | default: site.author_credit_html -%}
+    {%- if author_credit -%}
+      <li class="self-credit">{{ author_credit }}</li>
+    {%- endif -%}
+
     {%- assign credit_md = include.image_credit_md | default: page.image_credit_md | default: site.image_credit_md -%}
     {%- if credit_md -%}
       <li class="image-credit">{{ credit_md | markdownify }}</li>

@@ -1,4 +1,3 @@
-<!-- _includes/footer.html -->
 <footer id="footer">
   {%- if site.site_logo -%}
   <div class="footer-brand">
@@ -7,11 +6,16 @@
         src="{{ site.site_logo | relative_url }}"
         alt="{{ site.title | default: 'Site' }} logo"
         loading="lazy"
-        height="28"
+        height="44"
+        width="auto"
       />
     </a>
   </div>
   {%- endif -%}
 
-  {% include copyright.html owner=site.owner %}
+  {% include copyright.html
+      owner=site.owner
+      author_credit_html=site.author_credit_html
+      image_credit_md=page.image_credit_md
+  %}
 </footer>

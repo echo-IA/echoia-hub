@@ -14,8 +14,10 @@ code_license_url: "https://opensource.org/license/mit"
 image_credit_md: >
   Background image: [NASA](https://www.nasa.gov/),
   [ESA](https://www.esa.int/),
-  [S. Beckwith (STScI)](https://www.stsci.edu/),
   and the HUDF Team.
+
+author_credit_html: 'Site by <a href="https://nikosarcevic.com" rel="noopener">Niko Šarčević</a>'
+
 
 
 
