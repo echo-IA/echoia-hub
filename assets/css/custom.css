@@ -130,17 +130,11 @@ details.catalog .links {
 
 /* ─────────────────────────────
    3a) Banner logo layout (opt-in classes)
-   Add the classes in your banner include to activate:
-     <div class="inner banner--grid">
-       <div class="banner__logo-wrap"><img class="banner__logo" ... /></div>
-       <div class="banner__content">...</div>
-     </div>
    ───────────────────────────── */
 
 #banner .banner--grid {
-  display: block;
+  display: block; /* stack logo above text */
 }
-
 
 /* Logo sizing & polish */
 #banner .banner__logo-wrap {
@@ -176,7 +170,6 @@ details.catalog .links {
     line-height: 1.15;
   }
 }
-
 
 
 /* ─────────────────────────────
@@ -254,6 +247,7 @@ textarea:focus { border-color: #322234 !important; }
 
 .align-center { text-align: center; }
 
+
 /* ─────────────────────────────
    7) Centered, readable content column (site-wide)
    ───────────────────────────── */
@@ -324,14 +318,13 @@ main > .inner,
 
 /* Tighter typography inside each event */
 .feature-list h4 { margin: 0 0 0.35rem; }   /* trim big default heading margins */
-.feature-list p  { margin: 0 0 0.25rem; }   /* small gap between text lines */
+feature-list p  { margin: 0 0 0.25rem; }   /* small gap between text lines */
 .feature-list p:last-child { margin-bottom: 0; }  /* avoid extra gap before buttons */
 
 /* Space BETWEEN an event’s description and its button row */
 .feature-list ul.buttons {
   margin-top: 0.10rem !important;  /* this is the knob you tweak */
 }
-
 
 @media (min-width: 1400px) {
   :root { --content-max: 78ch; }
@@ -519,7 +512,6 @@ input[type="button"]:focus,
 input[type="submit"]:focus {
   background-image: none !important;
   box-shadow: none !important;
-  text-shadow: none !important;
 }
 
 /* active: avoid “pressed” inset look */
@@ -537,4 +529,184 @@ button,
 input[type="button"],
 input[type="submit"] {
   border-radius: 0 !important; /* tweak to taste */
+}
+
+/* Brand in header: logo + text inline (you already had these; keeping them) */
+#header #logo .brand { display: inline-flex; align-items: center; gap: 0.5rem; }
+#header #logo .brand__mark { display: block; width: 28px; height: 28px; }
+#header #logo .brand__text { line-height: 1; } /* keeps text vertically centered */
+
+
+/* ───────────────────────────────────────────────────────────────
+   HEADER — flat white; no borders/shadows; text-only hover/active
+   ─────────────────────────────────────────────────────────────── */
+
+/* Brand palette */
+:root{
+  --brand:        #322234;           /* default label color */
+  --brand-lighter: rgba(50,34,52,.70);  /* lighter purple for hover/active */
+}
+
+/* 1) Layout: logo/title left, nav right — flat white bar */
+#header{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:1rem !important;
+
+  background:#fff !important;   /* plain white bar */
+  border:0 !important;          /* no borders */
+  box-shadow:none !important;   /* no bevel/shadow */
+  padding:.6rem 1rem !important;
+  margin-bottom:.6rem !important;   /* breath above banner */
+  box-sizing:border-box !important;
+}
+
+/* neutralize any theme floats */
+#logo,#nav{ float:none !important; }
+
+/* 2) Logo/title block */
+#header #logo{
+  margin:0 !important;
+  padding:0 !important;
+  line-height:1 !important;
+  font-size:1rem !important;      /* keep the bar compact */
+  font-weight:700 !important;
+}
+#header #logo .brand{
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:.55rem !important;
+  text-decoration:none !important;
+  color:inherit !important;
+  border:0 !important;
+}
+#header #logo .brand__mark{
+  display:inline-block !important;
+  width:32px !important;           /* tweak 28–36 to taste */
+  height:auto !important;
+  object-fit:contain !important;
+  vertical-align:middle !important;
+}
+#header #logo .brand__text{
+  display:inline-block !important;
+  line-height:1.1 !important;
+  color:var(--brand) !important;
+  vertical-align:middle !important;
+}
+
+/* 3) Nav list: single row with even spacing */
+#header #nav{ margin-left:auto !important; }
+#header #nav > ul{
+  display:flex !important;
+  align-items:center !important;
+  gap:1rem !important;
+  margin:0 !important;
+  padding:0 !important;
+  list-style:none !important;
+}
+#header #nav > ul > li{ margin:0 !important; padding:0 !important; }
+
+/* 4) Tabs: comfy targets; NO background, NO bars/underlines */
+#header #nav > ul > li > a{
+  display:inline-block !important;
+  text-decoration:none !important;
+  color:var(--brand) !important;
+
+  line-height:1.3 !important;
+  padding:.5rem .7rem !important;
+  border:0 !important;                 /* no bottom bars */
+  background:transparent !important;   /* stays white */
+  border-radius:.25rem !important;     /* tiny soften; not a pill */
+
+  transition:color .15s ease;
+}
+
+/* Kill any theme hover bg/underline that might sneak in */
+#header nav ul li.active > a,
+#header nav ul li:hover > a{
+  background:transparent !important;
+  border-bottom:0 !important;
+}
+
+/* 5) Hover: text only gets lighter */
+#header #nav > ul > li > a:hover,
+#header #nav > ul > li > a:focus{
+  color:var(--brand-lighter) !important;
+}
+
+/* 6) Active/current: same lighter text, persistent */
+#header #nav > ul > li.current > a,
+#header #nav > ul > li.active > a,
+#header #nav > ul > li > a[aria-current="page"]{
+  color:var(--brand-lighter) !important;
+}
+
+/* 7) (Optional but accessible) show a subtle text-only focus */
+#header #nav > ul > li > a:focus-visible{
+  text-decoration: underline;
+  text-underline-offset: .18em;
+  text-decoration-thickness: 2px;
+}
+
+/* 8) Mobile: allow wrapping, slightly tighter padding */
+@media (max-width:768px){
+  #header{
+    flex-wrap:wrap !important;
+    gap:.5rem !important;
+    padding:.5rem .75rem !important;
+  }
+  #header #nav > ul{
+    flex-wrap:wrap !important;
+    gap:.6rem .8rem !important;
+  }
+  #header #nav > ul > li > a{
+    padding:.45rem .6rem !important;
+  }
+}
+
+
+/* ─────────────────────────────
+   11) Footer: centered layout + logo
+   ───────────────────────────── */
+/* FOOTER layout & logo — centered stack */
+#footer {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  text-align: center !important;
+  padding-top: 1rem;
+}
+
+/* Hubble UDF credit: links readable */
+#footer .image-credit { opacity: 0.85; }
+#footer .image-credit a { opacity: 1; }
+#footer .image-credit a:hover,
+#footer .image-credit a:focus { text-decoration: underline; }
+
+/* Footer logo */
+#footer .footer-brand img {
+  display: block;
+  height: 44px;              /* ↑ was 28px — tweak to taste */
+  width: auto;
+  filter: opacity(.95);      /* remove grayscale unless you want it */
+  transition: opacity .2s ease;
+}
+#footer .footer-brand a:hover img,
+#footer .footer-brand a:focus img { opacity: 1; }
+
+/* Center the copyright list nicely */
+#footer .copyright {
+  list-style: none;
+  margin: 0.25rem 0 0;
+  padding: 0;
+}
+#footer .copyright li {
+  display: inline;
+}
+#footer .copyright li + li::before {
+  content: " · ";
+  opacity: 0.6;
 }

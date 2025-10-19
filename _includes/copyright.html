@@ -1,7 +1,7 @@
 {%- comment -%}
 Usage:
   {% include copyright.html
-      owner="echo-IA Community"
+      owner="echo-IA Collaboration"
       start_year="2025"
       site_content_license_name="CC BY 4.0"
       site_content_license_url="https://creativecommons.org/licenses/by/4.0/"
@@ -30,5 +30,14 @@ Or rely on _config.yml keys with same names.
       {{ include.metadata_license_name | default: site.metadata_license_name | default: 'CC0 1.0' }}
     </a>; linked datasets © their owners.
   </li>
-  <li>Design: <a href="https://html5up.net" target="_blank" rel="noopener">HTML5 UP</a></li>
+  <li>
+      Design adapted from
+      <a href="https://html5up.net/twenty" target="_blank" rel="noopener">“Twenty” by HTML5 UP</a>
+      — <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="license noopener">CC BY 3.0</a>.
+    </li>
+    {%- assign credit_md = include.image_credit_md | default: page.image_credit_md | default: site.image_credit_md -%}
+    {%- if credit_md -%}
+      <li class="image-credit">{{ credit_md | markdownify }}</li>
+    {%- endif -%}
+
 </ul>

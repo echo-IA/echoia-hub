@@ -1,7 +1,17 @@
+<!-- _includes/footer.html -->
 <footer id="footer">
-  <ul class="icons">
-    <!-- Add real URLs when ready -->
-    <li><a href="#" class="icon brands circle fa-github" rel="noopener"><span class="label">Github</span></a></li>
-  </ul>
-  {% include copyright.html owner="echoIA Community" %}
+  {%- if site.site_logo -%}
+  <div class="footer-brand">
+    <a href="{{ '/' | relative_url }}" aria-label="{{ site.title | default: 'Home' }}">
+      <img
+        src="{{ site.site_logo | relative_url }}"
+        alt="{{ site.title | default: 'Site' }} logo"
+        loading="lazy"
+        height="28"
+      />
+    </a>
+  </div>
+  {%- endif -%}
+
+  {% include copyright.html owner=site.owner %}
 </footer>
