@@ -138,15 +138,9 @@ details.catalog .links {
    ───────────────────────────── */
 
 #banner .banner--grid {
-  display: grid;
-  gap: 1rem;
-  align-items: center;
+  display: block;
 }
 
-/* Side-by-side when there’s room; stacks on narrow screens */
-@media (min-width: 760px) {
-  #banner .banner--grid { grid-template-columns: auto 1fr; column-gap: 1.25rem; }
-}
 
 /* Logo sizing & polish */
 #banner .banner__logo-wrap {
@@ -167,10 +161,12 @@ details.catalog .links {
 #banner .banner__content header h2 {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
+  text-align: center;
 }
 #banner .banner__content .byline {
   margin-bottom: 0.75rem;
   letter-spacing: 0.06em;
+  text-align: center;
 }
 
 /* Slightly reduce title on very small screens to avoid cramming */
