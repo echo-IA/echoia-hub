@@ -16,8 +16,8 @@ blocks:
   - type: md
     title: "About echo-IA"
     align: center
+    anchor_id: "about-top" 
     content: |
-      <a id="about-top"></a>
       **echo-IA** (Enabling Cosmology with Homogenized Observations of Intrinsic Alignments) is a community space
       for _intrinsic alignment_ research. We bring together catalogs, tools, datasets, and workflows so results are
       easier to compare, reproduce, and extend.

@@ -8,14 +8,15 @@ nav_key: meetings
 show_banner: true
 banner_title: "Meetings & Workshops"
 banner_byline: "How we meet + past events"
-banner_cta: "Upcoming"
-banner_cta_url: "/meetings/#upcoming"
+banner_cta: "Tell me more"
+banner_cta_url: "#meetings-top"
 
 # Page hero
 hero:
   icon: "fa-regular fa-calendar-days"
   title: "echo-IA Meetings & Workshops"
   byline: "How we meet and links to previous events."
+  anchor_id: "meetings-top"
   align: center
 
 blocks:
@@ -32,7 +33,6 @@ blocks:
   - type: events
     title: "Upcoming"
     align: center
-    anchor_id: "upcoming"
     items:
       - year: 2025
         title: "echo-IA Community Check-in (Online)"
