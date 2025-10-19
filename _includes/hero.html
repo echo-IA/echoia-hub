@@ -1,29 +1,41 @@
-{% comment %} HERO include — safe CTA {% endcomment %}
-<header class="special container{% if include.align %} align-{{ include.align }}{% endif %}">
-  {% if include.icon %}<span class="icon {{ include.icon }}" aria-hidden="true"></span>{% endif %}
-  {% if include.title %}<h2>{{ include.title }}</h2>{% endif %}
-  {% if include.byline %}<p class="byline">{{ include.byline }}</p>{% endif %}
+{% comment %} HERO include — supports anchor_id + safe CTA {% endcomment %}
+<header class="special container{% if include.align %} align-{{ include.align }}{% endif %}"
+        {% if include.anchor_id %}id="{{ include.anchor_id }}"{% endif %}>
+
+  {% if include.icon %}
+    <span class="icon {{ include.icon }}" aria-hidden="true"></span>
+  {% endif %}
+
+  {% if include.title %}
+    <h2>{{ include.title }}</h2>
+  {% endif %}
+
+  {% if include.byline %}
+    <p class="byline">{{ include.byline }}</p>
+  {% endif %}
 
   {% if include.cta_label and include.cta_href %}
-    {% assign raw   = include.cta_href | default: '' %}
-    {% assign first = raw | slice: 0, 1 %}
-    {% assign lower = raw | downcase %}
+    {%- assign raw   = include.cta_href | default: '' -%}
+    {%- assign first = raw | slice: 0, 1 -%}
+    {%- assign lower = raw | downcase -%}
 
-    {%- comment -%} Keep hashes literal; only relativize real paths {%- endcomment -%}
-    {% assign href = raw %}
-    {% unless first == '#' or lower contains '://' or (lower | slice:0,2) == '//' %}
-      {% assign href = raw | relative_url %}
-    {% endunless %}
+    {%- comment -%} Keep hashes literal; relativize only site-internal paths {%- endcomment -%}
+    {%- assign href = raw -%}
+    {%- unless first == '#' or lower contains '://' or (lower | slice: 0, 2) == '//' -%}
+      {%- assign href = raw | relative_url -%}
+    {%- endunless -%}
 
-    {%- comment -%} External only for http(s) or protocol-relative {%- endcomment -%}
-    {% assign is_external = false %}
-    {% if lower contains '://' or (lower | slice:0,2) == '//' %}
-      {% assign is_external = true %}
-    {% endif %}
+    {%- comment -%} External if protocol present or protocol-relative {%- endcomment -%}
+    {%- assign is_external = false -%}
+    {%- if lower contains '://' or (lower | slice: 0, 2) == '//' -%}
+      {%- assign is_external = true -%}
+    {%- endif -%}
+
+    {%- assign is_anchor = first == '#' -%}
 
     <ul class="buttons buttons--{{ include.align | default: 'center' }}">
       <li>
-        <a class="button primary btn--lg"
+        <a class="button primary btn--lg{% if is_anchor %} scrolly{% endif %}"
            href="{{ href }}"
            {% if is_external %}target="_blank" rel="noopener"{% else %}target="_self"{% endif %}>
           {{ include.cta_label }}

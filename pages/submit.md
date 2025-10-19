@@ -7,14 +7,15 @@ nav_key: submit
 show_banner: true
 banner_title: "Submit your resource"
 banner_byline: "Add shape catalogs, tools, notebooks, or datasets"
-banner_cta: "Contact us"
-banner_cta_url: "/contact/"
+banner_cta: "I want to submit"
+banner_cta_url: "#submit-top"
 
 hero:
   icon: "fa-regular fa-square-plus"
   title: "Submit a Resource"
   byline: "Open a pre-filled GitHub issue. We’ll review and add it."
   align: center
+  anchor_id: "submit-top"
 
 blocks:
   # Catalog submission form

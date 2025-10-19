@@ -9,7 +9,8 @@ show_banner: true
 banner_title: "Shape Catalogs"
 banner_byline: "echo-IA Community"
 banner_cta: "Submit a catalog"
-banner_cta_url: "/submit/"
+banner_cta_url: "submit-top"
+
 
 # Load PapaParse on this page (your scripts include looks for this)
 papaparse: true

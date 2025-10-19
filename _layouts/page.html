@@ -7,12 +7,14 @@ layout: base
   role="main"
 >
   {% if page.hero %}
-    {% include hero.html
-       icon=page.hero.icon
-       title=page.hero.title
-       tagline=page.hero.byline
-       blurb=page.hero.blurb
-       align=page.hero.align %}
+  {% include hero.html
+     icon=page.hero.icon
+     title=page.hero.title
+     byline=page.hero.byline
+     align=page.hero.align
+     cta_label=page.hero.cta_label
+     cta_href=page.hero.cta_href
+     anchor_id=page.hero.anchor_id %}
 {% endif %}
 
 

@@ -11,7 +11,7 @@ banner_byline: "COLLABORATION"
 banner_logo: /images/logos/echoia_logo_white_notext_transparent.svg
 banner_logo_alt: "echo-IA logo"
 banner_cta: "Tell me more"
-banner_cta_url: "#about"
+banner_cta_url: "#home-top"
 
 # Page blocks
 blocks:
@@ -20,6 +20,7 @@ blocks:
     title: "About echo-IA"
     align: center
     content: |
+      <a id="home-top"></a>
       echo-IA (Enabling Cosmology with Homogenized Observations of Intrinsic Alignments) is a community space for
       _intrinsic alignment_ research. We bring together catalogs, tools, datasets, and workflows so results are easier
       to compare, reproduce, and extend.

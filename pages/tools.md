@@ -8,13 +8,14 @@ show_banner: true
 banner_title: "echo-IA Tools"
 banner_byline: "Software for IA research"
 banner_cta: "Explore tools"
-banner_cta_url: "/tools/"
+banner_cta_url: "#tools-top"
 
 hero:
   icon: "fa-solid fa-wrench"
   title: "echo-IA <strong>Tools</strong>"
   byline: "Software, scripts, and utilities supporting intrinsic alignment research."
   align: center
+  anchor_id: "tools-top"
 
 blocks:
   # Overview
